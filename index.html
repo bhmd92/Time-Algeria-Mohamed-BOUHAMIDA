@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ساعة الباحث محمد بوحميدة</title>
+
+        <!-- Fonts & Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Orbitron:wght@400;600;800;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            gold: {
+                                300: '#ffe58f',
+                                400: '#ffd666',
+                                500: '#faad14',
+                                600: '#d48806',
+                            },
+                            cyanNeon: '#00f3ff',
+                        },
+                        fontFamily: {
+                            tajawal: ['Tajawal', 'sans-serif'],
+                            orbitron: ['Orbitron', 'sans-serif'],
+                            amiri: ['Amiri', 'serif'],
+                        }
+                    }
+                }
+            }
+        </script>
+
+        <style>
+            body {
+                background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+                font-family: 'Tajawal', sans-serif;
+                overflow-x: hidden;
+            }
+
+            /* Neon Glow Effects */
+            .neon-cyan-text {
+                text-shadow: 0 0 10px rgba(0, 243, 255, 0.6), 0 0 20px rgba(0, 243, 255, 0.4);
+            }
+            .neon-gold-text {
+                text-shadow: 0 0 10px rgba(250, 173, 20, 0.6), 0 0 20px rgba(250, 173, 20, 0.4);
+            }
+            .glass-panel {
+                background: rgba(15, 23, 42, 0.75);
+                backdrop-filter: blur(16px);
+                border: 1px solid rgba(255, 215, 0, 0.15);
+                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            }
+
+            /* Smooth Clock Hands Transition */
+            .clock-hand {
+                transform-origin: 50% 100%;
+                transition: transform 0.05s cubic-bezier(0.4, 2.08, 0.55, 0.44);
+            }
+
+            /* Dynamic Background Animation */
+            .bg-particle {
+                position: absolute;
+                border-radius: 50%;
+                pointer-events: none;
+                animation: float 20s infinite linear;
+            }
+
+            @keyframes float {
+                0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+                50% { opacity: 0.3; }
+                100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+            }
+        </style>
+    </head>
+    <body class="min-h-screen text-slate-100 flex flex-col justify-between items-center p-4 relative overflow-y-auto">
+
+        <!-- Background Ambient Elements -->
+        <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+            <div class="absolute -top-32 -left-32 w-96 h-96 bg-cyanNeon/10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <!-- Header: Academic Title & Name -->
+        <header class="z-10 text-center mt-2 mb-4 space-y-2">
+            <div class="inline-block px-4 py-1 rounded-full bg-slate-900/80 border border-gold-500/30 text-gold-400 text-xs md:text-sm tracking-wider shadow-lg">
+                <i class="fa-solid fa-square-root-variable ml-1"></i> الباحث في نظريات الأعداد وفي أحداث النهاية
+            </div>
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-400 to-amber-500 neon-gold-text">
+                محمد بوحميدة
+            </h1>
+            <p class="text-xs sm:text-sm font-semibold text-cyanNeon tracking-widest uppercase font-orbitron">
+                Mohamed BOUHAMIDA
+            </p>
+            <div class="text-xs text-slate-400 flex items-center justify-center gap-1">
+                <i class="fa-solid fa-location-dot text-red-400"></i>
+                <span>عين الصفراء &bull; ولاية النعامة &bull; الجزائر</span>
+            </div>
+        </header>
+
+        <!-- Main Display Container -->
+        <main class="z-10 flex flex-col lg:flex-row items-center justify-center gap-8 my-auto w-full max-w-5xl">
+            
+            <!-- Analog Clock -->
+            <div class="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full glass-panel flex items-center justify-center border-2 border-gold-500/30 shadow-[0_0_50px_rgba(250,173,20,0.15)] flex-shrink-0">
+                
+                <!-- Outer Decorative Rings -->
+                <div class="absolute inset-2 rounded-full border border-dashed border-cyanNeon/30"></div>
+                <div class="absolute inset-4 rounded-full border border-slate-700"></div>
+                
+                <!-- Center Emblem -->
+                <div class="absolute text-center select-none pointer-events-none opacity-20 text-gold-400">
+                    <span class="text-4xl md:text-6xl font-serif">∑</span>
+                </div>
+
+                <!-- Clock Dial Markers -->
+                <div id="dial-markers" class="absolute inset-0"></div>
+
+                <!-- Hands Container -->
+                <div class="relative w-full h-full">
+                    <!-- Hour Hand -->
+                    <div id="hour-hand" class="clock-hand absolute top-[25%] left-1/2 w-1.5 md:w-2 h-[25%] bg-gradient-to-t from-gold-500 to-amber-300 rounded-full z-30 -translate-x-1/2 shadow-[0_0_10px_rgba(250,173,20,0.8)]"></div>
+                    
+                    <!-- Minute Hand -->
+                    <div id="minute-hand" class="clock-hand absolute top-[15%] left-1/2 w-1 md:w-1.5 h-[35%] bg-gradient-to-t from-cyanNeon to-cyan-200 rounded-full z-40 -translate-x-1/2 shadow-[0_0_10px_rgba(0,243,255,0.8)]"></div>
+                    
+                    <!-- Second Hand -->
+                    <div id="second-hand" class="clock-hand absolute top-[10%] left-1/2 w-0.5 h-[40%] bg-red-500 rounded-full z-50 -translate-x-1/2 shadow-[0_0_8px_rgba(239,68,68,0.9)]"></div>
+                    
+                    <!-- Center Pin -->
+                    <div class="absolute top-1/2 left-1/2 w-4 h-4 bg-gold-400 rounded-full z-50 -translate-x-1/2 -translate-y-1/2 border-2 border-slate-900 shadow-md"></div>
+                </div>
+            </div>
+
+            <!-- Digital Display & Calendars -->
+            <div class="flex flex-col items-center justify-center space-y-4 w-full max-w-sm">
+                
+                <!-- Live Digital Clock Display -->
+                <div class="glass-panel px-8 py-6 rounded-3xl text-center border-gold-500/30 w-full shadow-lg">
+                    <div id="digital-clock" class="text-4xl sm:text-5xl md:text-6xl font-extrabold font-orbitron tracking-wider text-cyanNeon neon-cyan-text">
+                        00:00:00
+                    </div>
+                    <div id="digital-ampm" class="text-sm md:text-base font-semibold text-gold-400 mt-2 font-tajawal">
+                        --
+                    </div>
+                </div>
+
+                <!-- Three Calendars Display Card -->
+                <div class="glass-panel px-6 py-4 rounded-2xl w-full text-center space-y-3 border-gold-500/20">
+                    
+                    <!-- 1. Gregorian Date -->
+                    <div class="flex items-center justify-center space-x-2 space-x-reverse text-slate-200 text-sm md:text-base font-medium">
+                        <i class="fa-regular fa-calendar-days text-gold-400"></i>
+                        <span id="gregorian-date">-- ---- ----</span>
+                    </div>
+
+                    <!-- 2. Hijri Date -->
+                    <div class="flex items-center justify-center space-x-2 space-x-reverse text-gold-300 text-sm md:text-base font-bold font-amiri">
+                        <i class="fa-solid fa-moon text-cyanNeon"></i>
+                        <span id="hijri-date">-- ---- ----</span>
+                    </div>
+
+                    <!-- 3. Time Travel Calendar (Past Travel) -->
+                    <div class="pt-2 border-t border-slate-700/60 flex items-center justify-center space-x-2 space-x-reverse text-cyanNeon text-xs md:text-sm font-semibold">
+                        <i class="fa-solid fa-hourglass-half text-gold-400"></i>
+                        <span id="past-travel-date">--</span>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="flex items-center gap-3">
+                    <button id="toggle-format" class="px-5 py-2.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-gold-500/30 text-gold-400 text-xs md:text-sm font-bold transition-all shadow-md active:scale-95">
+                        نظام 12 / 24 ساعة
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="z-10 text-center pb-2 mt-4">
+            <p class="text-[10px] sm:text-xs text-slate-400 font-mono tracking-widest">
+                MOHAMED BOUHAMIDA RESEARCH CLOCK &bull; AIN SEFRA, ALGERIA
+            </p>
+        </footer>
+
+        <!-- Application Logic Script -->
+        <script>
+            let is24HourFormat = false;
+
+            // Generate Clock Markers/Numbers
+            function generateDial() {
+                const dial = document.getElementById('dial-markers');
+                if (!dial) return;
+                dial.innerHTML = '';
+                const mathSymbols = ['XII', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
+                
+                const radius = 41; // Percentage radius position
+                for (let i = 0; i < 12; i++) {
+                    const angle = (i * 30 - 90) * (Math.PI / 180);
+                    const x = 50 + radius * Math.cos(angle);
+                    const y = 50 + radius * Math.sin(angle);
+
+                    const marker = document.createElement('div');
+                    marker.className = 'absolute transform -translate-x-1/2 -translate-y-1/2 text-gold-400 font-bold font-orbitron text-xs sm:text-sm md:text-base select-none';
+                    marker.style.left = `${x}%`;
+                    marker.style.top = `${y}%`;
+                    marker.innerText = mathSymbols[i];
+                    dial.appendChild(marker);
+                }
+            }
+
+            // Calculate Past Travel Millions of Years (07 Nov 2026 = 6.025 M Years)
+            function calculatePastTravel(now) {
+                const refDate = new Date(2026, 10, 7); // Month 10 is November in JS Date
+                const currentDateOnly = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                const refDateOnly = new Date(refDate.getFullYear(), refDate.getMonth(), refDate.getDate());
+                
+                const diffTime = currentDateOnly - refDateOnly;
+                const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+                
+                const val = 6.025 + (diffDays * 0.001);
+                return `${val.toFixed(3)} مليون سنة في الماضي`;
+            }
+
+            // Helper to update HTML element text safely
+            function setElementText(id, text) {
+                const el = document.getElementById(id);
+                if (el) el.innerText = text;
+            }
+
+            // Core Clock Engine Update Loop
+            function updateClock() {
+                const now = new Date();
+
+                // 1. Analog Hands Rotation Calculation
+                const seconds = now.getSeconds() + now.getMilliseconds() / 1000;
+                const minutes = now.getMinutes() + seconds / 60;
+                const hours = (now.getHours() % 12) + minutes / 60;
+
+                const secondDeg = seconds * 6;
+                const minuteDeg = minutes * 6;
+                const hourDeg = hours * 30;
+
+                const secondHand = document.getElementById('second-hand');
+                const minuteHand = document.getElementById('minute-hand');
+                const hourHand = document.getElementById('hour-hand');
+
+                if (secondHand) secondHand.style.transform = `translateX(-50%) rotate(${secondDeg}deg)`;
+                if (minuteHand) minuteHand.style.transform = `translateX(-50%) rotate(${minuteDeg}deg)`;
+                if (hourHand) hourHand.style.transform = `translateX(-50%) rotate(${hourDeg}deg)`;
+
+                // 2. Digital Clock Display Calculation
+                let h = now.getHours();
+                const m = String(now.getMinutes()).padStart(2, '0');
+                const s = String(now.getSeconds()).padStart(2, '0');
+                let ampm = '';
+
+                if (!is24HourFormat) {
+                    ampm = h >= 12 ? 'مساءً (PM)' : 'صباحاً (AM)';
+                    h = h % 12 || 12;
+                } else {
+                    ampm = 'توقيت 24 ساعة';
+                }
+
+                const displayHours = String(h).padStart(2, '0');
+                setElementText('digital-clock', `${displayHours}:${m}:${s}`);
+                setElementText('digital-ampm', ampm);
+
+                // 3. Gregorian Date Display
+                try {
+                    const gregOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    setElementText('gregorian-date', now.toLocaleDateString('ar-DZ', gregOptions));
+                } catch (e) {
+                    setElementText('gregorian-date', now.toDateString());
+                }
+
+                // 4. Hijri Date Display
+                try {
+                    const hijriOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+                    setElementText('hijri-date', new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura', hijriOptions).format(now));
+                } catch (e) {
+                    try {
+                        setElementText('hijri-date', new Intl.DateTimeFormat('ar-SA-u-ca-islamic', { year: 'numeric', month: 'long', day: 'numeric' }).format(now));
+                    } catch (err) {
+                        setElementText('hijri-date', 'التقويم الهجري');
+                    }
+                }
+
+                // 5. Time Travel Calendar Display
+                setElementText('past-travel-date', calculatePastTravel(now));
+            }
+
+            // Initialize Application
+            function initClockApp() {
+                generateDial();
+                updateClock();
+                setInterval(updateClock, 50); // Refresh at 20fps for super smooth seconds hand motion
+
+                const toggleBtn = document.getElementById('toggle-format');
+                if (toggleBtn) {
+                    toggleBtn.onclick = function() {
+                        is24HourFormat = !is24HourFormat;
+                        updateClock();
+                    };
+                }
+            }
+
+            // Safe Execution Handling
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initClockApp);
+            } else {
+                initClockApp();
+            }
+        </script>
+    </body>
+</html>
