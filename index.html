@@ -86,6 +86,16 @@
             </div>
         </div>
 
+        <!-- Top Cosmic Journey Banner -->
+        <div class="z-20 w-full max-w-4xl px-2 mb-3">
+            <div class="glass-panel px-4 py-2.5 rounded-2xl border border-cyanNeon/40 text-center shadow-[0_0_20px_rgba(0,243,255,0.15)]">
+                <p id="top-cosmic-banner" class="text-xs sm:text-sm md:text-base font-bold text-cyanNeon neon-cyan-text leading-relaxed">
+                    <i class="fa-solid fa-clock-rotate-left text-gold-400 ml-1.5"></i>
+                    الكون في رحلة عودة إلى الماضي، كل يومٍ يمرّ يُعيد الأرض ألف عامٍ إلى الماضي. تابع الرحلة يوما بيوم، وحوّل أيّ تاريخ إلى سنوات في الماضي.
+                </p>
+            </div>
+        </div>
+
         <!-- Background Ambient Elements -->
         <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
             <div class="absolute -top-32 -left-32 w-96 h-96 bg-cyanNeon/10 rounded-full blur-3xl"></div>
@@ -166,8 +176,8 @@
                     </div>
 
                     <!-- 2. Hijri Date -->
-                    <div class="flex items-center justify-center space-x-2 space-x-reverse text-gold-300 text-sm md:text-base font-bold font-amiri">
-                        <i class="fa-solid fa-moon text-cyanNeon"></i>
+                    <div id="hijri-container" class="pt-2 border-t border-slate-700/60 flex items-center justify-center space-x-2 space-x-reverse text-amber-300 text-xs md:text-sm font-medium transition-all">
+                        <i class="fa-solid fa-moon text-gold-400"></i>
                         <span id="hijri-date">-- ---- ----</span>
                     </div>
 
@@ -179,9 +189,12 @@
                 </div>
 
                 <!-- Controls -->
-                <div class="flex items-center gap-3">
+                <div class="flex flex-wrap items-center justify-center gap-3">
                     <button id="toggle-format" class="px-5 py-2.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-gold-500/30 text-gold-400 text-xs md:text-sm font-bold transition-all shadow-md active:scale-95">
                         نظام 12 / 24 ساعة
+                    </button>
+                    <button id="toggle-hijri" class="px-5 py-2.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-cyanNeon/30 text-cyanNeon text-xs md:text-sm font-bold transition-all shadow-md active:scale-95">
+                        إخفاء الهجري
                     </button>
                 </div>
             </div>
@@ -254,16 +267,20 @@
         <!-- Application Logic Script -->
         <script>
             let is24HourFormat = false;
+            let isHijriVisible = true;
             let currentLang = 'ar';
 
             // Translations Dictionary for 14 Languages
             const i18n = {
                 ar: {
                     dir: 'rtl',
+                    topBanner: 'الكون في رحلة عودة إلى الماضي، كل يومٍ يمرّ يُعيد الأرض ألف عامٍ إلى الماضي. تابع الرحلة يوما بيوم، وحوّل أيّ تاريخ إلى سنوات في الماضي.',
                     title: 'الباحث في نظريات الأعداد وفي أحداث النهاية',
                     name: 'محمد بوحميدة',
                     location: 'عين الصفراء • ولاية النعامة • الجزائر',
                     formatBtn: 'نظام 12 / 24 ساعة',
+                    hideHijri: 'إخفاء الهجري',
+                    showHijri: 'إظهار الهجري',
                     pm: 'مساءً (PM)',
                     am: 'صباحاً (AM)',
                     hours24: 'توقيت 24 ساعة',
@@ -282,10 +299,13 @@
                 },
                 en: {
                     dir: 'ltr',
+                    topBanner: 'The universe is on a journey back to the past; every passing day takes Earth a thousand years back. Follow the journey day by day, and convert any date into years in the past.',
                     title: 'Researcher in Number Theory & End-Time Events',
                     name: 'Mohamed BOUHAMIDA',
                     location: 'Ain Sefra • Naama Province • Algeria',
                     formatBtn: '12 / 24 Hour Format',
+                    hideHijri: 'Hide Hijri',
+                    showHijri: 'Show Hijri',
                     pm: 'PM',
                     am: 'AM',
                     hours24: '24-Hour Time',
@@ -304,10 +324,13 @@
                 },
                 fr: {
                     dir: 'ltr',
+                    topBanner: 'L\'univers est dans un voyage de retour vers le passé ; chaque jour qui passe ramène la Terre mille ans en arrière. Suivez le voyage jour après jour et convertissez n\'importe quelle date en années dans le passé.',
                     title: 'Chercheur en Théorie des Nombres & Événements de la Fin des Temps',
                     name: 'Mohamed BOUHAMIDA',
                     location: 'Aïn Séfra • Wilaya de Naâma • Algérie',
                     formatBtn: 'Format 12 / 24H',
+                    hideHijri: 'Masquer Hégirien',
+                    showHijri: 'Afficher Hégirien',
                     pm: 'PM',
                     am: 'AM',
                     hours24: 'Format 24 Heures',
@@ -326,10 +349,13 @@
                 },
                 es: {
                     dir: 'ltr',
+                    topBanner: 'El universo está en un viaje de regreso al pasado; cada día que pasa devuelve a la Tierra mil años atrás. Sigue el viaje día a día y convierte cualquier fecha en años en el pasado.',
                     title: 'Investigador en Teoría de Números y Eventos del Fin de los Tiempos',
                     name: 'Mohamed BOUHAMIDA',
                     location: 'Ain Sefra • Provincia de Naama • Argelia',
                     formatBtn: 'Formato 12 / 24 Horas',
+                    hideHijri: 'Ocultar Hégira',
+                    showHijri: 'Mostrar Hégira',
                     pm: 'PM',
                     am: 'AM',
                     hours24: 'Formato 24 Horas',
@@ -348,10 +374,13 @@
                 },
                 de: {
                     dir: 'ltr',
+                    topBanner: 'Das Universum befindet sich auf einer Reise zurück in die Vergangenheit; jeder vergehende Tag bringt die Erde tausend Jahre zurück. Verfolgen Sie die Reise Tag für Tag und rechnen Sie jedes Datum in Jahre der Vergangenheit um.',
                     title: 'Forscher für Zahlentheorie & Endzeit-Ereignisse',
                     name: 'Mohamed BOUHAMIDA',
                     location: 'Ain Sefra • Provinz Naama • Algerien',
                     formatBtn: '12 / 24 Stunden Format',
+                    hideHijri: 'Hidschri ausblenden',
+                    showHijri: 'Hidschri anzeigen',
                     pm: 'PM',
                     am: 'AM',
                     hours24: '24-Stunden-Format',
@@ -370,10 +399,13 @@
                 },
                 zh: {
                     dir: 'ltr',
+                    topBanner: '宇宙正处于重返过去的旅程中，每过一天，地球就会回到一千年前。逐日追踪这段旅程，并将任何日期转换为过去的年份。',
                     title: '数论与末世事件研究员',
                     name: 'Mohamed BOUHAMIDA (穆罕默德·布哈米达)',
                     location: '阿恩塞夫拉 • 纳马省 • 阿尔及利亚',
                     formatBtn: '12 / 24 小时制',
+                    hideHijri: '隐藏伊斯兰历',
+                    showHijri: '显示伊斯兰历',
                     pm: '下午 (PM)',
                     am: '上午 (AM)',
                     hours24: '24小时制',
@@ -392,10 +424,13 @@
                 },
                 hi: {
                     dir: 'ltr',
+                    topBanner: 'ब्रह्मांड अतीत की ओर वापसी की यात्रा पर है; बीतने वाला हर दिन पृथ्वी को एक हजार साल पीछे ले जाता है। दिन-प्रतिदिन इस यात्रा का अनुसरण करें, और किसी भी तिथि को अतीत के वर्षों में बदलें।',
                     title: 'संख्या सिद्धांत और अंत समय की घटनाओं के शोधकर्ता',
                     name: 'Mohamed BOUHAMIDA (मोहम्मद बोहमिला)',
                     location: 'ऐन सेफरा • नामा प्रांत • अल्जीरिया',
                     formatBtn: '12 / 24 घंटे का प्रारूप',
+                    hideHijri: 'हिजरी छिपाएं',
+                    showHijri: 'हिजरी दिखाएं',
                     pm: 'अपराह्न (PM)',
                     am: 'पूर्वाह्न (AM)',
                     hours24: '24-घंटे का प्रारूप',
@@ -414,10 +449,13 @@
                 },
                 ru: {
                     dir: 'ltr',
+                    topBanner: 'Вселенная совершает путешествие назад в прошлое; каждый прошедший день возвращает Землю на тысячу лет назад. Следите за путешествием день за днём и переводите любую дату в годы прошлого.',
                     title: 'Исследователь теории чисел и событий конца времен',
                     name: 'Mohamed BOUHAMIDA (Мохамед Бухамида)',
                     location: 'Айн-Сефра • Провинция Наама • Алжир',
                     formatBtn: 'Формат 12 / 24 часа',
+                    hideHijri: 'Скрыть Хиджру',
+                    showHijri: 'Показать Хиджру',
                     pm: 'PM',
                     am: 'AM',
                     hours24: '24-часовой формат',
@@ -436,10 +474,13 @@
                 },
                 ja: {
                     dir: 'ltr',
+                    topBanner: '宇宙は過去へと戻る旅の途上にあります。一日過ぎるごとに地球は千年過去へと戻ります。日々その旅を追い、あらゆる日付を過去の年数へと変換しましょう。',
                     title: '数論および終末事象の研究者',
                     name: 'Mohamed BOUHAMIDA (モハメド・ブーハミダ)',
                     location: 'アインセフラ • 拿马省 • アルジェリア',
                     formatBtn: '12 / 24 時間表示',
+                    hideHijri: 'ヒジュラ暦を隠す',
+                    showHijri: 'ヒジュラ暦を表示',
                     pm: '午後 (PM)',
                     am: '午前 (AM)',
                     hours24: '24時間 modal',
@@ -458,10 +499,13 @@
                 },
                 it: {
                     dir: 'ltr',
+                    topBanner: 'L\'universo è in un viaggio di ritorno al passato; ogni giorno che passa riporta la Terra indietro di mille anni. Segui il viaggio giorno per giorno e converti qualsiasi data in anni nel passato.',
                     title: 'Ricercatore in Teoria dei Numeri ed Eventi della Fine dei Tempi',
                     name: 'Mohamed BOUHAMIDA',
                     location: 'Ain Sefra • Provincia di Naama • Algeria',
                     formatBtn: 'Formato 12 / 24 Ore',
+                    hideHijri: 'Nascondi Egira',
+                    showHijri: 'Mostra Egira',
                     pm: 'PM',
                     am: 'AM',
                     hours24: 'Formato 24 Ore',
@@ -480,10 +524,13 @@
                 },
                 sv: {
                     dir: 'ltr',
+                    topBanner: 'Universum är på en resa tillbaka till det förflutna; varje dag som går för jorden tusen år tillbaka. Följ resan dag för dag och omvandla valfritt datum till år i det förflutna.',
                     title: 'Forskare i talteori & sluttidshändelser',
                     name: 'Mohamed BOUHAMIDA',
                     location: 'Ain Sefra • Naama-provinsen • Algeriet',
                     formatBtn: '12 / 24-timmarsformat',
+                    hideHijri: 'Dölj Hijri',
+                    showHijri: 'Visa Hijri',
                     pm: 'E.M.',
                     am: 'F.M.',
                     hours24: '24-timmarsvisning',
@@ -502,10 +549,13 @@
                 },
                 tr: {
                     dir: 'ltr',
+                    topBanner: 'Evren geçmişe doğru bir dönüş yolculuğunda; geçen her gün Dünya\'yı bin yıl geriye götürüyor. Yolculuğu gün be gün takip edin ve herhangi bir tarihi geçmişteki yıllara dönüştürün.',
                     title: 'Sayılar Teorisi ve Ahir Zaman Olayları Araştırmacısı',
                     name: 'Mohamed BOUHAMIDA',
                     location: 'Ayn Sefra • Naama Vilayeti • Cezayir',
                     formatBtn: '12 / 24 Saat Formatı',
+                    hideHijri: 'Hicri Gizle',
+                    showHijri: 'Hicri Göster',
                     pm: 'Ö.S.',
                     am: 'Ö.Ö.',
                     hours24: '24-Saat Formatı',
@@ -524,10 +574,13 @@
                 },
                 pt: {
                     dir: 'ltr',
+                    topBanner: 'O universo está em uma jornada de volta ao passado; cada dia que passa leva a Terra mil anos para trás. Acompanhe a jornada dia a dia e converta qualquer data em anos no passado.',
                     title: 'Pesquisador em Teoria dos Números e Eventos do Fim dos Tempos',
                     name: 'Mohamed BOUHAMIDA',
                     location: 'Ain Sefra • Província de Naama • Argélia',
                     formatBtn: 'Formato 12 / 24 Horas',
+                    hideHijri: 'Ocultar Hijri',
+                    showHijri: 'Mostrar Hijri',
                     pm: 'PM',
                     am: 'AM',
                     hours24: 'Formato 24 Horas',
@@ -546,10 +599,13 @@
                 },
                 fa: {
                     dir: 'rtl',
+                    topBanner: 'جهان در سفر بازگشت به گذشته است؛ هر روزی که می‌گذرد زمین را هزار سال به گذشته بازمی‌گرداند. سفر را روز به روز دنبال کنید و هر تاریخی را به سال‌های گذشته تبدیل نمایید.',
                     title: 'پژوهشگر نظریه اعداد و رویدادهای آخرالزمان',
                     name: 'محمد بوحمیده',
                     location: 'عین الصفراء • استان النعامه • الجزایر',
                     formatBtn: 'فرمت ۱۲ / ۲۴ ساعته',
+                    hideHijri: 'مخفی کردن هجری',
+                    showHijri: 'نمایش هجری',
                     pm: 'عصر (PM)',
                     am: 'صبح (AM)',
                     hours24: 'زمان ۲۴ ساعته',
@@ -617,6 +673,12 @@
 
                 document.documentElement.dir = config.dir;
                 
+                // Update Top Banner
+                const bannerEl = document.getElementById('top-cosmic-banner');
+                if (bannerEl) {
+                    bannerEl.innerHTML = `<i class="fa-solid fa-clock-rotate-left text-gold-400 ${config.dir === 'rtl' ? 'ml-1.5' : 'mr-1.5'}"></i> ${config.topBanner}`;
+                }
+
                 // Update Static Texts
                 const titleEl = document.getElementById('researcher-title');
                 if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-square-root-variable ${config.dir === 'rtl' ? 'ml-1' : 'mr-1'}"></i> ${config.title}`;
@@ -627,6 +689,7 @@
                 if (locEl) locEl.innerText = config.location;
 
                 setElementText('toggle-format', config.formatBtn);
+                setElementText('toggle-hijri', isHijriVisible ? config.hideHijri : config.showHijri);
                 setElementText('converter-title', config.converterTitle);
                 setElementText('lbl-date-to-years', config.lblDateToYears);
                 setElementText('lbl-years-to-date', config.lblYearsToDate);
@@ -758,19 +821,22 @@
                     setElementText('gregorian-date', now.toDateString());
                 }
 
-                // 4. Hijri Date Display
+                // 4. Hijri Date Display (Calibrated: Nov 12, 2026 = 2 Jumada al-Akhirah 1448)
                 try {
+                    const calibratedNow = new Date(now);
+                    const hijriLocale = `${config.locale}-u-ca-islamic-umalqura`;
                     const hijriOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-                    let hijriLocale = config.locale + '-u-ca-islamic-umalqura';
-                    if (currentLang === 'fa') hijriLocale = 'fa-IR-u-ca-islamic-civil';
                     
-                    setElementText('hijri-date', new Intl.DateTimeFormat(hijriLocale, hijriOptions).format(now));
+                    // Check if standard umalqura matches Nov 12, 2026 -> 2 Jumada II 1448
+                    const testNov12 = new Date(2026, 10, 12);
+                    const parts = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', { day: 'numeric' }).formatToParts(testNov12);
+                    const dayPart = parts.find(p => p.type === 'day');
+                    const offsetDays = dayPart ? (2 - parseInt(dayPart.value, 10)) : 0;
+                    
+                    calibratedNow.setDate(calibratedNow.getDate() + offsetDays);
+                    setElementText('hijri-date', calibratedNow.toLocaleDateString(hijriLocale, hijriOptions));
                 } catch (e) {
-                    try {
-                        setElementText('hijri-date', new Intl.DateTimeFormat('ar-SA-u-ca-islamic', { year: 'numeric', month: 'long', day: 'numeric' }).format(now));
-                    } catch (err) {
-                        setElementText('hijri-date', 'Hijri Calendar');
-                    }
+                    setElementText('hijri-date', '--');
                 }
 
                 // 5. Time Travel Calendar Display
@@ -788,6 +854,19 @@
                     toggleBtn.onclick = function() {
                         is24HourFormat = !is24HourFormat;
                         updateClock();
+                    };
+                }
+
+                const toggleHijriBtn = document.getElementById('toggle-hijri');
+                if (toggleHijriBtn) {
+                    toggleHijriBtn.onclick = function() {
+                        isHijriVisible = !isHijriVisible;
+                        const hijriContainer = document.getElementById('hijri-container');
+                        if (hijriContainer) {
+                            hijriContainer.style.display = isHijriVisible ? 'flex' : 'none';
+                        }
+                        const config = i18n[currentLang] || i18n.ar;
+                        toggleHijriBtn.innerText = isHijriVisible ? config.hideHijri : config.showHijri;
                     };
                 }
 
