@@ -91,7 +91,7 @@
             <div class="glass-panel px-4 py-2.5 rounded-2xl border border-cyanNeon/40 text-center shadow-[0_0_20px_rgba(0,243,255,0.15)]">
                 <p id="top-cosmic-banner" class="text-xs sm:text-sm md:text-base font-bold text-cyanNeon neon-cyan-text leading-relaxed">
                     <i class="fa-solid fa-clock-rotate-left text-gold-400 ml-1.5"></i>
-                    الكون في رحلة عودة إلى الماضي، كل يومٍ يمرّ يُعيد الأرض ألف عامٍ إلى الماضي. تابع الرحلة يوما بيوم، وحوّل أيّ تاريخ إلى سنوات في الماضي.
+                    الكون في رحلة عودة إلى الماضي، كل يومٍ يمرّ انطلاقا من 10 ماي 2010 يُعيد الأرض ألف عامٍ إلى الماضي. تابع الرحلة لحظة بلحظة، وحوّل أيّ تاريخ إلى سنوات في الماضي.
                 </p>
             </div>
         </div>
@@ -122,34 +122,48 @@
         <!-- Main Display Container -->
         <main class="z-10 flex flex-col lg:flex-row items-center justify-center gap-8 my-auto w-full max-w-5xl">
             
-            <!-- Analog Clock -->
-            <div class="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full glass-panel flex items-center justify-center border-2 border-gold-500/30 shadow-[0_0_50px_rgba(250,173,20,0.15)] flex-shrink-0">
-                
-                <!-- Outer Decorative Rings -->
-                <div class="absolute inset-2 rounded-full border border-dashed border-cyanNeon/30"></div>
-                <div class="absolute inset-4 rounded-full border border-slate-700"></div>
-                
-                <!-- Center Emblem -->
-                <div class="absolute text-center select-none pointer-events-none opacity-20 text-gold-400">
-                    <span class="text-4xl md:text-6xl font-serif">∑</span>
+            <!-- Analog Clock Column with High-Precision Live Counter -->
+            <div class="flex flex-col items-center justify-center gap-4 flex-shrink-0">
+                <!-- Live 1-Decimal Years Past Travel Display above Analog Clock -->
+                <div class="glass-panel px-5 py-2.5 rounded-2xl border border-cyanNeon/40 shadow-[0_0_20px_rgba(0,243,255,0.2)] text-center">
+                    <div class="flex items-center justify-center gap-2 text-cyanNeon font-orbitron text-lg sm:text-xl md:text-2xl font-extrabold tracking-wider neon-cyan-text" dir="ltr">
+                        <i class="fa-solid fa-hourglass-half text-gold-400 text-sm sm:text-base animate-pulse"></i>
+                        <span id="live-precise-years">6025000.0</span>
+                    </div>
+                    <div id="live-precise-label" class="text-[11px] sm:text-xs text-gold-300 font-semibold mt-0.5">
+                        سنة في الماضي
+                    </div>
                 </div>
 
-                <!-- Clock Dial Markers -->
-                <div id="dial-markers" class="absolute inset-0"></div>
+                <!-- Analog Clock -->
+                <div class="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full glass-panel flex items-center justify-center border-2 border-gold-500/30 shadow-[0_0_50px_rgba(250,173,20,0.15)] flex-shrink-0">
+                    
+                    <!-- Outer Decorative Rings -->
+                    <div class="absolute inset-2 rounded-full border border-dashed border-cyanNeon/30"></div>
+                    <div class="absolute inset-4 rounded-full border border-slate-700"></div>
+                    
+                    <!-- Center Emblem -->
+                    <div class="absolute text-center select-none pointer-events-none opacity-20 text-gold-400">
+                        <span class="text-4xl md:text-6xl font-serif">∑</span>
+                    </div>
 
-                <!-- Hands Container -->
-                <div class="relative w-full h-full">
-                    <!-- Hour Hand -->
-                    <div id="hour-hand" class="clock-hand absolute top-[25%] left-1/2 w-1.5 md:w-2 h-[25%] bg-gradient-to-t from-gold-500 to-amber-300 rounded-full z-30 -translate-x-1/2 shadow-[0_0_10px_rgba(250,173,20,0.8)]"></div>
-                    
-                    <!-- Minute Hand -->
-                    <div id="minute-hand" class="clock-hand absolute top-[15%] left-1/2 w-1 md:w-1.5 h-[35%] bg-gradient-to-t from-cyanNeon to-cyan-200 rounded-full z-40 -translate-x-1/2 shadow-[0_0_10px_rgba(0,243,255,0.8)]"></div>
-                    
-                    <!-- Second Hand -->
-                    <div id="second-hand" class="clock-hand absolute top-[10%] left-1/2 w-0.5 h-[40%] bg-red-500 rounded-full z-50 -translate-x-1/2 shadow-[0_0_8px_rgba(239,68,68,0.9)]"></div>
-                    
-                    <!-- Center Pin -->
-                    <div class="absolute top-1/2 left-1/2 w-4 h-4 bg-gold-400 rounded-full z-50 -translate-x-1/2 -translate-y-1/2 border-2 border-slate-900 shadow-md"></div>
+                    <!-- Clock Dial Markers -->
+                    <div id="dial-markers" class="absolute inset-0"></div>
+
+                    <!-- Hands Container -->
+                    <div class="relative w-full h-full">
+                        <!-- Hour Hand -->
+                        <div id="hour-hand" class="clock-hand absolute top-[25%] left-1/2 w-1.5 md:w-2 h-[25%] bg-gradient-to-t from-gold-500 to-amber-300 rounded-full z-30 -translate-x-1/2 shadow-[0_0_10px_rgba(250,173,20,0.8)]"></div>
+                        
+                        <!-- Minute Hand -->
+                        <div id="minute-hand" class="clock-hand absolute top-[15%] left-1/2 w-1 md:w-1.5 h-[35%] bg-gradient-to-t from-cyanNeon to-cyan-200 rounded-full z-40 -translate-x-1/2 shadow-[0_0_10px_rgba(0,243,255,0.8)]"></div>
+                        
+                        <!-- Second Hand -->
+                        <div id="second-hand" class="clock-hand absolute top-[10%] left-1/2 w-0.5 h-[40%] bg-red-500 rounded-full z-50 -translate-x-1/2 shadow-[0_0_8px_rgba(239,68,68,0.9)]"></div>
+                        
+                        <!-- Center Pin -->
+                        <div class="absolute top-1/2 left-1/2 w-4 h-4 bg-gold-400 rounded-full z-50 -translate-x-1/2 -translate-y-1/2 border-2 border-slate-900 shadow-md"></div>
+                    </div>
                 </div>
             </div>
 
@@ -270,11 +284,17 @@
             let isHijriVisible = true;
             let currentLang = 'ar';
 
+            // Safe DOM text setter helper
+            function setElementText(id, text) {
+                const el = document.getElementById(id);
+                if (el) el.innerText = text;
+            }
+
             // Translations Dictionary for 14 Languages
             const i18n = {
                 ar: {
                     dir: 'rtl',
-                    topBanner: 'الكون في رحلة عودة إلى الماضي، كل يومٍ يمرّ يُعيد الأرض ألف عامٍ إلى الماضي. تابع الرحلة يوما بيوم، وحوّل أيّ تاريخ إلى سنوات في الماضي.',
+                    topBanner: 'الكون في رحلة عودة إلى الماضي، كل يومٍ يمرّ انطلاقا من 10 ماي 2010 يُعيد الأرض ألف عامٍ إلى الماضي. تابع الرحلة لحظة بلحظة، وحوّل أيّ تاريخ إلى سنوات في الماضي.',
                     title: 'الباحث في نظريات الأعداد وفي أحداث النهاية',
                     name: 'محمد بوحميدة',
                     location: 'عين الصفراء • ولاية النعامة • الجزائر',
@@ -285,6 +305,7 @@
                     am: 'صباحاً (AM)',
                     hours24: 'توقيت 24 ساعة',
                     pastTravel: 'مليون سنة في الماضي',
+                    yearsInPastUnit: 'سنة في الماضي',
                     converterTitle: 'محول زمن الماضي التفاعلي',
                     lblDateToYears: 'تحويل التاريخ إلى ملايين السنين (ابتداءً من 10 ماي 2010):',
                     lblYearsToDate: 'تحويل ملايين السنين إلى تاريخ (0.001 = يوم):',
@@ -299,7 +320,7 @@
                 },
                 en: {
                     dir: 'ltr',
-                    topBanner: 'The universe is on a journey back to the past; every passing day takes Earth a thousand years back. Follow the journey day by day, and convert any date into years in the past.',
+                    topBanner: 'The universe is on a journey back to the past; every passing day starting from May 10, 2010 takes Earth a thousand years back. Follow the journey moment by moment, and convert any date into years in the past.',
                     title: 'Researcher in Number Theory & End-Time Events',
                     name: 'Mohamed BOUHAMIDA',
                     location: 'Ain Sefra • Naama Province • Algeria',
@@ -310,6 +331,7 @@
                     am: 'AM',
                     hours24: '24-Hour Time',
                     pastTravel: 'Million Years in the Past',
+                    yearsInPastUnit: 'Years in the Past',
                     converterTitle: 'Interactive Past Time Converter',
                     lblDateToYears: 'Convert Date to Million Years (From May 10, 2010):',
                     lblYearsToDate: 'Convert Million Years to Date (0.001 = 1 day):',
@@ -324,7 +346,7 @@
                 },
                 fr: {
                     dir: 'ltr',
-                    topBanner: 'L\'univers est dans un voyage de retour vers le passé ; chaque jour qui passe ramène la Terre mille ans en arrière. Suivez le voyage jour après jour et convertissez n\'importe quelle date en années dans le passé.',
+                    topBanner: 'L\'univers est dans un voyage de retour vers le passé ; chaque jour qui passe à partir du 10 mai 2010 ramène la Terre mille ans en arrière. Suivez le voyage instant après instant et convertissez n\'importe quelle date en années dans le passé.',
                     title: 'Chercheur en Théorie des Nombres & Événements de la Fin des Temps',
                     name: 'Mohamed BOUHAMIDA',
                     location: 'Aïn Séfra • Wilaya de Naâma • Algérie',
@@ -335,6 +357,7 @@
                     am: 'AM',
                     hours24: 'Format 24 Heures',
                     pastTravel: 'Millions d\'années dans le passé',
+                    yearsInPastUnit: 'Années dans le passé',
                     converterTitle: 'Convertisseur Temporel du Passé Interactif',
                     lblDateToYears: 'Convertir une date en millions d\'années (Dès le 10 mai 2010):',
                     lblYearsToDate: 'Convertir des millions d\'années en date (0,001 = 1 jour):',
@@ -349,7 +372,7 @@
                 },
                 es: {
                     dir: 'ltr',
-                    topBanner: 'El universo está en un viaje de regreso al pasado; cada día que pasa devuelve a la Tierra mil años atrás. Sigue el viaje día a día y convierte cualquier fecha en años en el pasado.',
+                    topBanner: 'El universo está en un viaje de regreso al pasado; cada día que pasa a partir del 10 de mayo de 2010 devuelve a la Tierra mil años atrás. Sigue el viaje momento a momento y convierte cualquier fecha en años en el pasado.',
                     title: 'Investigador en Teoría de Números y Eventos del Fin de los Tiempos',
                     name: 'Mohamed BOUHAMIDA',
                     location: 'Ain Sefra • Provincia de Naama • Argelia',
@@ -360,6 +383,7 @@
                     am: 'AM',
                     hours24: 'Formato 24 Horas',
                     pastTravel: 'Millones de Años en el Pasado',
+                    yearsInPastUnit: 'Años en el Pasado',
                     converterTitle: 'Convertidor Temporal del Pasado Interactivo',
                     lblDateToYears: 'Convertir Fecha a Millones de Años (Desde 10 Mayo 2010):',
                     lblYearsToDate: 'Convertir Millones de Años a Fecha (0.001 = 1 día):',
@@ -374,7 +398,7 @@
                 },
                 de: {
                     dir: 'ltr',
-                    topBanner: 'Das Universum befindet sich auf einer Reise zurück in die Vergangenheit; jeder vergehende Tag bringt die Erde tausend Jahre zurück. Verfolgen Sie die Reise Tag für Tag und rechnen Sie jedes Datum in Jahre der Vergangenheit um.',
+                    topBanner: 'Das Universum befindet sich auf einer Reise zurück in die Vergangenheit; jeder vergehende Tag ab dem 10. Mai 2010 bringt die Erde tausend Jahre zurück. Verfolgen Sie die Reise Augenblick für Augenblick und rechnen Sie jedes Datum in Jahre der Vergangenheit um.',
                     title: 'Forscher für Zahlentheorie & Endzeit-Ereignisse',
                     name: 'Mohamed BOUHAMIDA',
                     location: 'Ain Sefra • Provinz Naama • Algerien',
@@ -385,6 +409,7 @@
                     am: 'AM',
                     hours24: '24-Stunden-Format',
                     pastTravel: 'Millionen Jahre in der Vergangenheit',
+                    yearsInPastUnit: 'Jahre in der Vergangenheit',
                     converterTitle: 'Interaktiver Vergangenheits-Zeitrechner',
                     lblDateToYears: 'Datum in Millionen Jahre umrechnen (Ab 10. Mai 2010):',
                     lblYearsToDate: 'Millionen Jahre in Datum umrechnen (0,001 = 1 Tag):',
@@ -399,7 +424,7 @@
                 },
                 zh: {
                     dir: 'ltr',
-                    topBanner: '宇宙正处于重返过去的旅程中，每过一天，地球就会回到一千年前。逐日追踪这段旅程，并将任何日期转换为过去的年份。',
+                    topBanner: '宇宙正处于重返过去的旅程中，自2010年5月10日起，每过一天，地球就会回到一千年前。时刻追踪这段旅程，并将任何日期转换为过去的年份。',
                     title: '数论与末世事件研究员',
                     name: 'Mohamed BOUHAMIDA (穆罕默德·布哈米达)',
                     location: '阿恩塞夫拉 • 纳马省 • 阿尔及利亚',
@@ -410,6 +435,7 @@
                     am: '上午 (AM)',
                     hours24: '24小时制',
                     pastTravel: '百万年前',
+                    yearsInPastUnit: '年前',
                     converterTitle: '互动过去时间转换器',
                     lblDateToYears: '将日期转换为百万年（从2010年5月10日起）：',
                     lblYearsToDate: '将百万年转换为日期（0.001 = 1天）：',
@@ -424,7 +450,7 @@
                 },
                 hi: {
                     dir: 'ltr',
-                    topBanner: 'ब्रह्मांड अतीत की ओर वापसी की यात्रा पर है; बीतने वाला हर दिन पृथ्वी को एक हजार साल पीछे ले जाता है। दिन-प्रतिदिन इस यात्रा का अनुसरण करें, और किसी भी तिथि को अतीत के वर्षों में बदलें।',
+                    topBanner: 'ब्रह्मांड अतीत की ओर वापसी की यात्रा पर है; 10 मई 2010 से बीतने वाला हर दिन पृथ्वी को एक हजार साल पीछे ले जाता है। पल-पल इस यात्रा का अनुसरण करें, और किसी भी तिथि को अतीत के वर्षों में बदलें।',
                     title: 'संख्या सिद्धांत और अंत समय की घटनाओं के शोधकर्ता',
                     name: 'Mohamed BOUHAMIDA (मोहम्मद बोहमिला)',
                     location: 'ऐन सेफरा • नामा प्रांत • अल्जीरिया',
@@ -435,6 +461,7 @@
                     am: 'पूर्वाह्न (AM)',
                     hours24: '24-घंटे का प्रारूप',
                     pastTravel: 'दस लाख साल अतीत में',
+                    yearsInPastUnit: 'साल अतीत में',
                     converterTitle: 'इंटरएक्टिव अतीत समय परिवर्तक',
                     lblDateToYears: 'तिथि को 10 लाख वर्षों में बदलें (10 मई 2010 से):',
                     lblYearsToDate: '10 लाख वर्षों को तिथि में बदलें (0.001 = 1 दिन):',
@@ -449,7 +476,7 @@
                 },
                 ru: {
                     dir: 'ltr',
-                    topBanner: 'Вселенная совершает путешествие назад в прошлое; каждый прошедший день возвращает Землю на тысячу лет назад. Следите за путешествием день за днём и переводите любую дату в годы прошлого.',
+                    topBanner: 'Вселенная совершает путешествие назад в прошлое; каждый прошедший день, начиная с 10 мая 2010 года, возвращает Землю на тысячу лет назад. Следите за путешествием мгновение за мгновением и переводите любую дату в годы прошлого.',
                     title: 'Исследователь теории чисел и событий конца времен',
                     name: 'Mohamed BOUHAMIDA (Мохамед Бухамида)',
                     location: 'Айн-Сефра • Провинция Наама • Алжир',
@@ -460,6 +487,7 @@
                     am: 'AM',
                     hours24: '24-часовой формат',
                     pastTravel: 'миллионов лет в прошлом',
+                    yearsInPastUnit: 'лет в прошлом',
                     converterTitle: 'Интерактивный конвертер времени прошлого',
                     lblDateToYears: 'Перевод даты в миллионы лет (с 10 мая 2010 года):',
                     lblYearsToDate: 'Перевод миллионов лет в дату (0.001 = 1 день):',
@@ -474,7 +502,7 @@
                 },
                 ja: {
                     dir: 'ltr',
-                    topBanner: '宇宙は過去へと戻る旅の途上にあります。一日過ぎるごとに地球は千年過去へと戻ります。日々その旅を追い、あらゆる日付を過去の年数へと変換しましょう。',
+                    topBanner: '宇宙は過去へと戻る旅の途上にあります。2010年5月10日以降、一日過ぎるごとに地球は千年過去へと戻ります。刻一刻とその旅を追い、あらゆる日付を過去の年数へと変換しましょう。',
                     title: '数論および終末事象の研究者',
                     name: 'Mohamed BOUHAMIDA (モハメド・ブーハミダ)',
                     location: 'アインセフラ • 拿马省 • アルジェリア',
@@ -485,6 +513,7 @@
                     am: '午前 (AM)',
                     hours24: '24時間 modal',
                     pastTravel: '百万年前',
+                    yearsInPastUnit: '年前',
                     converterTitle: 'インタラクティブ過去時間コンバーター',
                     lblDateToYears: '日付を百万年に変換（2010年5月10日以降）：',
                     lblYearsToDate: '百万年を日付に変換（0.001 = 1日）：',
@@ -499,7 +528,7 @@
                 },
                 it: {
                     dir: 'ltr',
-                    topBanner: 'L\'universo è in un viaggio di ritorno al passato; ogni giorno che passa riporta la Terra indietro di mille anni. Segui il viaggio giorno per giorno e converti qualsiasi data in anni nel passato.',
+                    topBanner: 'L\'universo è in un viaggio di ritorno al passato; ogni giorno che passa a partire dal 10 maggio 2010 riporta la Terra indietro di mille anni. Segui il viaggio istante per istante e converti qualsiasi data in anni nel passato.',
                     title: 'Ricercatore in Teoria dei Numeri ed Eventi della Fine dei Tempi',
                     name: 'Mohamed BOUHAMIDA',
                     location: 'Ain Sefra • Provincia di Naama • Algeria',
@@ -510,6 +539,7 @@
                     am: 'AM',
                     hours24: 'Formato 24 Ore',
                     pastTravel: 'Milioni di Anni nel Passato',
+                    yearsInPastUnit: 'Anni nel Passato',
                     converterTitle: 'Convertitore Temporale del Passato Interattivo',
                     lblDateToYears: 'Converti data in milioni di anni (Dal 10 maggio 2010):',
                     lblYearsToDate: 'Converti milioni di anni in data (0.001 = 1 giorno):',
@@ -524,7 +554,7 @@
                 },
                 sv: {
                     dir: 'ltr',
-                    topBanner: 'Universum är på en resa tillbaka till det förflutna; varje dag som går för jorden tusen år tillbaka. Följ resan dag för dag och omvandla valfritt datum till år i det förflutna.',
+                    topBanner: 'Universum är på en resa tillbaka till det förflutna; varje dag som går från och med den 10 maj 2010 för jorden tusen år tillbaka. Följ resan ögonblick för ögonblick och omvandla valfritt datum till år i det förflutna.',
                     title: 'Forskare i talteori & sluttidshändelser',
                     name: 'Mohamed BOUHAMIDA',
                     location: 'Ain Sefra • Naama-provinsen • Algeriet',
@@ -535,6 +565,7 @@
                     am: 'F.M.',
                     hours24: '24-timmarsvisning',
                     pastTravel: 'Miljoner år i det förflutna',
+                    yearsInPastUnit: 'År i det förflutna',
                     converterTitle: 'Interaktiv förfluten tid-omvandlare',
                     lblDateToYears: 'Omvandla datum till miljoner år (Från 10 maj 2010):',
                     lblYearsToDate: 'Omvandla miljoner år till datum (0.001 = 1 dag):',
@@ -549,7 +580,7 @@
                 },
                 tr: {
                     dir: 'ltr',
-                    topBanner: 'Evren geçmişe doğru bir dönüş yolculuğunda; geçen her gün Dünya\'yı bin yıl geriye götürüyor. Yolculuğu gün be gün takip edin ve herhangi bir tarihi geçmişteki yıllara dönüştürün.',
+                    topBanner: 'Evren geçmişe doğru bir dönüş yolculuğunda; 10 Mayıs 2010\'dan itibaren geçen her gün Dünya\'yı bin yıl geriye götürüyor. Yolculuğu anbean takip edin ve herhangi bir tarihi geçmişteki yıllara dönüştürün.',
                     title: 'Sayılar Teorisi ve Ahir Zaman Olayları Araştırmacısı',
                     name: 'Mohamed BOUHAMIDA',
                     location: 'Ayn Sefra • Naama Vilayeti • Cezayir',
@@ -560,6 +591,7 @@
                     am: 'Ö.Ö.',
                     hours24: '24-Saat Formatı',
                     pastTravel: 'Milyon Yıl Geçmişte',
+                    yearsInPastUnit: 'Yıl Geçmişte',
                     converterTitle: 'Etkileşimli Geçmiş Zaman Dönüştürücüsü',
                     lblDateToYears: 'Tarihi Milyon Yıla Dönüştür (10 Mayıs 2010\'dan itibaren):',
                     lblYearsToDate: 'Milyon Yılı Tarihe Dönüştür (0.001 = 1 gün):',
@@ -574,7 +606,7 @@
                 },
                 pt: {
                     dir: 'ltr',
-                    topBanner: 'O universo está em uma jornada de volta ao passado; cada dia que passa leva a Terra mil anos para trás. Acompanhe a jornada dia a dia e converta qualquer data em anos no passado.',
+                    topBanner: 'O universo está em uma jornada de volta ao passado; cada dia que passa a partir de 10 de maio de 2010 leva a Terra mil anos para trás. Acompanhe a jornada momento a momento e converta qualquer data em anos no passado.',
                     title: 'Pesquisador em Teoria dos Números e Eventos do Fim dos Tempos',
                     name: 'Mohamed BOUHAMIDA',
                     location: 'Ain Sefra • Província de Naama • Argélia',
@@ -585,6 +617,7 @@
                     am: 'AM',
                     hours24: 'Formato 24 Horas',
                     pastTravel: 'Milhões de Anos no Passado',
+                    yearsInPastUnit: 'Anos no Passado',
                     converterTitle: 'Conversor Interativo de Tempo do Passado',
                     lblDateToYears: 'Converter data em milhões de anos (A partir de 10 maio 2010):',
                     lblYearsToDate: 'Converter milhões de anos em data (0.001 = 1 dia):',
@@ -599,7 +632,7 @@
                 },
                 fa: {
                     dir: 'rtl',
-                    topBanner: 'جهان در سفر بازگشت به گذشته است؛ هر روزی که می‌گذرد زمین را هزار سال به گذشته بازمی‌گرداند. سفر را روز به روز دنبال کنید و هر تاریخی را به سال‌های گذشته تبدیل نمایید.',
+                    topBanner: 'جهان در سفر بازگشت به گذشته است؛ هر روزی که از ۱۰ مه ۲۰۱۰ به بعد می‌گذرد، زمین را هزار سال به گذشته بازمی‌گرداند. سفر را لحظه به لحظه دنبال کنید و هر تاریخی را به سال‌های گذشته تبدیل نمایید.',
                     title: 'پژوهشگر نظریه اعداد و رویدادهای آخرالزمان',
                     name: 'محمد بوحمیده',
                     location: 'عین الصفراء • استان النعامه • الجزایر',
@@ -610,6 +643,7 @@
                     am: 'صبح (AM)',
                     hours24: 'زمان ۲۴ ساعته',
                     pastTravel: 'میلیون سال در گذشته',
+                    yearsInPastUnit: 'سال در گذشته',
                     converterTitle: 'مبدل تعاملی زمان گذشته',
                     lblDateToYears: 'تبدیل تاریخ به میلیون سال (از ۱۰ مه ۲۰۱۰ به بعد):',
                     lblYearsToDate: 'تبدیل میلیون سال به تاریخ (۰.۰۰۱ = ۱ روز):',
@@ -660,10 +694,13 @@
                 return `${val.toFixed(3)} ${langConfig.pastTravel}`;
             }
 
-            // Helper to update HTML element text safely
-            function setElementText(id, text) {
-                const el = document.getElementById(id);
-                if (el) el.innerText = text;
+            // Calculate High-Precision Live Past Travel in Years (1 decimal place, updates every ~86 seconds)
+            function calculatePrecisePastTravel(now) {
+                const refTimestamp = new Date(2026, 10, 7, 0, 0, 0, 0).getTime();
+                const elapsedMs = now.getTime() - refTimestamp;
+                const elapsedDaysExact = elapsedMs / (1000 * 60 * 60 * 24);
+                const valInYears = 6025000 + (elapsedDaysExact * 1000);
+                return valInYears.toFixed(1);
             }
 
             // Update UI based on selected language
@@ -699,6 +736,7 @@
                 setElementText('theory-title', config.theoryTitle);
                 setElementText('theory-paragraph', config.theoryText);
                 setElementText('footer-text', config.footer);
+                setElementText('live-precise-label', config.yearsInPastUnit);
 
                 // Refresh converter calculation text with language context
                 calculateDateToYears();
@@ -841,6 +879,9 @@
 
                 // 5. Time Travel Calendar Display
                 setElementText('past-travel-date', calculatePastTravel(now));
+
+                // 6. Live 7-Decimal Counter above Analog Clock
+                setElementText('live-precise-years', calculatePrecisePastTravel(now));
             }
 
             // Initialize Application
