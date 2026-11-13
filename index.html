@@ -130,11 +130,11 @@
             
             <!-- Analog Clock Column with High-Precision Live Counter -->
             <div class="flex flex-col items-center justify-center gap-4 flex-shrink-0">
-                <!-- Live 1-Decimal Years Past Travel Display above Analog Clock -->
+                <!-- Live 2-Decimal Years Past Travel Display above Analog Clock -->
                 <div class="glass-panel px-5 py-2.5 rounded-2xl border border-cyanNeon/40 shadow-[0_0_20px_rgba(0,243,255,0.2)] text-center">
                     <div class="flex items-center justify-center gap-2 text-cyanNeon font-orbitron text-lg sm:text-xl md:text-2xl font-extrabold tracking-wider neon-cyan-text" dir="ltr">
                         <i class="fa-solid fa-hourglass-half text-gold-400 text-sm sm:text-base animate-pulse"></i>
-                        <span id="live-precise-years">6025000.0</span>
+                        <span id="live-precise-years">6025000.00</span>
                     </div>
                     <div id="live-precise-label" class="text-[11px] sm:text-xs text-gold-300 font-semibold mt-0.5">
                         سنة في الماضي
@@ -728,13 +728,13 @@
                 return `${val.toFixed(3)} ${langConfig.pastTravel}`;
             }
 
-            // Calculate High-Precision Live Past Travel in Years (1 decimal place, updates every ~86 seconds)
+            // Calculate High-Precision Live Past Travel in Years (2 decimal places, updates every ~8.64 seconds)
             function calculatePrecisePastTravel(now) {
                 const refTimestamp = new Date(2026, 10, 7, 0, 0, 0, 0).getTime();
                 const elapsedMs = now.getTime() - refTimestamp;
                 const elapsedDaysExact = elapsedMs / (1000 * 60 * 60 * 24);
                 const valInYears = 6025000 + (elapsedDaysExact * 1000);
-                return valInYears.toFixed(1);
+                return valInYears.toFixed(2);
             }
 
             // Update UI based on selected language
