@@ -1023,23 +1023,23 @@
                         dialLocation.innerText = config.location;
                         topGroup.style.opacity = '1';
                         dialLocation.style.opacity = '1';
+                    } else if (cyclePhase === 1 || cyclePhase === 3) {
+                        topGroup.style.opacity = '0';
+                        dialLocation.style.opacity = '0';
                     } else if (cyclePhase === 2) {
                         dialName.innerText = config.dialRoleTop;
                         dialBirth.style.display = 'none';
                         dialLocation.innerText = config.dialRoleBottom;
                         topGroup.style.opacity = '1';
                         dialLocation.style.opacity = '1';
-                    } else {
-                        topGroup.style.opacity = '0';
-                        dialLocation.style.opacity = '0';
                     }
                 }
 
-                // 8. Dial Markers 6-second cycle (Roman <-> Standard Numbers)
+                // 8. Alternate Dial Numbers every 6 seconds between Roman and Standard Numbers
                 updateDialMarkersCycle(now);
             }
 
-            // Initialize Live Visitor Counter
+            // Initialize Live Visitor Counter (Works both inside Preview and when hosted externally on the Internet)
             async function initVisitorCounter() {
                 const countEl = document.getElementById('visitor-count');
                 if (!countEl) return;
@@ -1081,7 +1081,36 @@
                             await setDoc(counterRef, { count: 1 });
                         }
                     } else {
-                        countEl.innerText = '1';
+                        // Public Global Cloud Counter for External Web Hosting
+                        const namespace = 'mohamed-bouhamida-research-clock-2026';
+                        const key = 'visits';
+                        const hitUrl = `https://abacus.jasoncameron.dev/hit/${namespace}/${key}`;
+                        const getUrl = `https://abacus.jasoncameron.dev/get/${namespace}/${key}`;
+
+                        const response = await fetch(hitUrl);
+                        if (response.ok) {
+                            const data = await response.json();
+                            if (typeof data.value === 'number') {
+                                countEl.innerText = data.value.toLocaleString('en-US');
+                            }
+                        } else {
+                            countEl.innerText = '1';
+                        }
+
+                        // Refresh counter automatically every 15 seconds for live updates
+                        setInterval(async () => {
+                            try {
+                                const res = await fetch(getUrl);
+                                if (res.ok) {
+                                    const liveData = await res.json();
+                                    if (typeof liveData.value === 'number') {
+                                        countEl.innerText = liveData.value.toLocaleString('en-US');
+                                    }
+                                }
+                            } catch (e) {
+                                // Ignore transient network polling errors
+                            }
+                        }, 15000);
                     }
                 } catch (error) {
                     console.error("Visitor counter initialization error:", error);
