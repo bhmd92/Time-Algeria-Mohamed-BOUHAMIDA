@@ -108,35 +108,18 @@
             <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl"></div>
         </div>
 
-        <!-- Header: Academic Title & Name -->
-        <header class="z-10 text-center mt-1 mb-4 space-y-2">
-            <div id="researcher-title" class="inline-block px-4 py-1 rounded-full bg-slate-900/80 border border-gold-500/30 text-gold-400 text-xs md:text-sm tracking-wider shadow-lg">
-                <i class="fa-solid fa-square-root-variable ml-1"></i> الباحث في نظريات الأعداد وفي أحداث النهاية
-            </div>
-            <h1 id="researcher-name" class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-400 to-amber-500 neon-gold-text">
-                محمد بوحميدة
-            </h1>
-            <p class="text-xs sm:text-sm font-semibold text-cyanNeon tracking-widest uppercase font-orbitron">
-                Mohamed BOUHAMIDA
-            </p>
-            <div class="text-xs text-slate-400 flex items-center justify-center gap-1">
-                <i class="fa-solid fa-location-dot text-red-400"></i>
-                <span id="location-text">عين الصفراء &bull; ولاية النعامة &bull; الجزائر</span>
-            </div>
-        </header>
-
         <!-- Main Display Container -->
-        <main class="z-10 flex flex-col lg:flex-row items-center justify-center gap-8 my-auto w-full max-w-5xl">
+        <main class="z-10 flex flex-col lg:flex-row items-center lg:items-start justify-center gap-8 my-auto w-full max-w-5xl">
             
             <!-- Analog Clock Column with High-Precision Live Counter -->
             <div class="flex flex-col items-center justify-center gap-4 flex-shrink-0">
                 <!-- Live 2-Decimal Years Past Travel Display above Analog Clock -->
-                <div class="glass-panel px-5 py-2.5 rounded-2xl border border-cyanNeon/40 shadow-[0_0_20px_rgba(0,243,255,0.2)] text-center">
-                    <div class="flex items-center justify-center gap-2 text-cyanNeon font-orbitron text-lg sm:text-xl md:text-2xl font-extrabold tracking-wider neon-cyan-text" dir="ltr">
-                        <i class="fa-solid fa-hourglass-half text-gold-400 text-sm sm:text-base animate-pulse"></i>
+                <div class="glass-panel px-6 py-3 rounded-2xl border border-cyanNeon/40 shadow-[0_0_20px_rgba(0,243,255,0.2)] text-center">
+                    <div class="flex items-center justify-center gap-2.5 text-cyanNeon font-orbitron text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-wider neon-cyan-text" dir="ltr">
+                        <i class="fa-solid fa-hourglass-half text-gold-400 text-lg sm:text-xl md:text-2xl animate-pulse"></i>
                         <span id="live-precise-years">6025000.00</span>
                     </div>
-                    <div id="live-precise-label" class="text-[11px] sm:text-xs text-gold-300 font-semibold mt-0.5">
+                    <div id="live-precise-label" class="text-xs sm:text-sm md:text-base text-gold-300 font-bold mt-1">
                         سنة في الماضي
                     </div>
                 </div>
@@ -148,9 +131,19 @@
                     <div class="absolute inset-2 rounded-full border border-dashed border-cyanNeon/30"></div>
                     <div class="absolute inset-4 rounded-full border border-slate-700"></div>
                     
-                    <!-- Center Emblem -->
-                    <div class="absolute text-center select-none pointer-events-none opacity-20 text-gold-400">
-                        <span class="text-4xl md:text-6xl font-serif">∑</span>
+                    <!-- Center Emblem & Researcher Signature Inside Dial -->
+                    <div class="absolute inset-0 flex flex-col items-center justify-between py-14 sm:py-16 md:py-20 pointer-events-none select-none z-10">
+                        <div id="dial-top-group" class="flex flex-col items-center transition-opacity duration-700">
+                            <div id="dial-name" class="text-[11px] sm:text-xs md:text-sm font-bold text-gold-300/90 tracking-wide neon-gold-text text-center px-4">
+                                محمد بوحميدة
+                            </div>
+                            <div id="dial-birth" class="text-[9px] sm:text-[10px] md:text-xs font-bold text-emerald-400 drop-shadow-[0_0_6px_rgba(52,211,153,0.7)] mt-0.5 text-center px-4">
+                                مولود في 1969
+                            </div>
+                        </div>
+                        <div id="dial-location" class="text-[9px] sm:text-[10px] md:text-xs font-medium text-cyanNeon/80 tracking-normal transition-opacity duration-700 text-center px-4">
+                            عين الصفراء ولاية النعامة الجزائر
+                        </div>
                     </div>
 
                     <!-- Clock Dial Markers -->
@@ -174,42 +167,42 @@
             </div>
 
             <!-- Digital Display & Calendars -->
-            <div class="flex flex-col items-center justify-center space-y-4 w-full max-w-sm">
+            <div class="flex flex-col items-center justify-between space-y-5 w-full max-w-md lg:mt-1">
                 
                 <!-- Live Digital Clock Display -->
-                <div class="glass-panel px-8 py-6 rounded-3xl text-center border-gold-500/30 w-full shadow-lg">
-                    <div id="digital-clock" class="text-4xl sm:text-5xl md:text-6xl font-extrabold font-orbitron tracking-wider text-cyanNeon neon-cyan-text">
+                <div class="glass-panel px-6 py-4 rounded-3xl text-center border-gold-500/30 w-full shadow-lg">
+                    <div id="digital-clock" class="text-3xl sm:text-4xl md:text-5xl font-extrabold font-orbitron tracking-wider text-cyanNeon neon-cyan-text">
                         00:00:00
                     </div>
-                    <div id="digital-ampm" class="text-sm md:text-base font-semibold text-gold-400 mt-2 font-tajawal">
+                    <div id="digital-ampm" class="text-xs md:text-sm font-semibold text-gold-400 mt-1.5 font-tajawal">
                         --
                     </div>
                 </div>
 
                 <!-- Three Calendars Display Card -->
-                <div class="glass-panel px-6 py-4 rounded-2xl w-full text-center space-y-3 border-gold-500/20">
+                <div class="glass-panel px-6 py-8 rounded-3xl w-full text-center space-y-6 border-gold-500/20 shadow-lg">
                     
                     <!-- 1. Gregorian Date -->
-                    <div class="flex items-center justify-center space-x-2 space-x-reverse text-slate-200 text-sm md:text-base font-medium">
-                        <i class="fa-regular fa-calendar-days text-gold-400"></i>
+                    <div class="flex items-center justify-center space-x-2.5 space-x-reverse text-slate-100 text-lg sm:text-xl md:text-2xl font-extrabold leading-relaxed">
+                        <i class="fa-regular fa-calendar-days text-gold-400 text-xl sm:text-2xl"></i>
                         <span id="gregorian-date">-- ---- ----</span>
                     </div>
 
                     <!-- 2. Hijri Date -->
-                    <div id="hijri-container" class="pt-2 border-t border-slate-700/60 flex items-center justify-center space-x-2 space-x-reverse text-amber-300 text-xs md:text-sm font-medium transition-all">
-                        <i class="fa-solid fa-moon text-gold-400"></i>
+                    <div id="hijri-container" class="pt-5 border-t border-slate-700/60 flex items-center justify-center space-x-2.5 space-x-reverse text-amber-300 text-lg sm:text-xl md:text-2xl font-extrabold leading-relaxed transition-all">
+                        <i class="fa-solid fa-moon text-gold-400 text-xl sm:text-2xl"></i>
                         <span id="hijri-date">-- ---- ----</span>
                     </div>
 
                     <!-- 3. Time Travel Calendar (Past Travel) -->
-                    <div class="pt-2 border-t border-slate-700/60 flex items-center justify-center space-x-2 space-x-reverse text-cyanNeon text-xs md:text-sm font-semibold">
-                        <i class="fa-solid fa-hourglass-half text-gold-400"></i>
+                    <div class="pt-5 border-t border-slate-700/60 flex items-center justify-center space-x-2.5 space-x-reverse text-cyanNeon text-lg sm:text-xl md:text-2xl font-extrabold leading-relaxed neon-cyan-text">
+                        <i class="fa-solid fa-hourglass-half text-gold-400 text-xl sm:text-2xl"></i>
                         <span id="past-travel-date">--</span>
                     </div>
                 </div>
 
                 <!-- Controls -->
-                <div class="flex flex-wrap items-center justify-center gap-3">
+                <div class="flex flex-wrap items-center justify-center gap-3 pt-1">
                     <button id="toggle-format" class="px-5 py-2.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-gold-500/30 text-gold-400 text-xs md:text-sm font-bold transition-all shadow-md active:scale-95">
                         نظام 12 / 24 ساعة
                     </button>
@@ -305,7 +298,10 @@
                     topDesignDate: 'صممت هذه الساعة يوم 12 نوفمبر 2026.',
                     title: 'الباحث في نظريات الأعداد وفي أحداث النهاية',
                     name: 'محمد بوحميدة',
+                    birthYear: 'مولود في 1969',
                     location: 'عين الصفراء • ولاية النعامة • الجزائر',
+                    dialRoleTop: 'باحث في النظريات على الأعداد',
+                    dialRoleBottom: 'مهتم بأحداث و علوم نهاية الزمان',
                     formatBtn: 'نظام 12 / 24 ساعة',
                     hideHijri: 'إخفاء الهجري',
                     showHijri: 'إظهار الهجري',
@@ -333,7 +329,10 @@
                     topDesignDate: 'This clock was designed on November 12, 2026.',
                     title: 'Researcher in Number Theory & End-Time Events',
                     name: 'Mohamed BOUHAMIDA',
+                    birthYear: 'Born in 1969',
                     location: 'Ain Sefra • Naama Province • Algeria',
+                    dialRoleTop: 'Researcher in Number Theory',
+                    dialRoleBottom: 'Interested in End-Time Events & Sciences',
                     formatBtn: '12 / 24 Hour Format',
                     hideHijri: 'Hide Hijri',
                     showHijri: 'Show Hijri',
@@ -361,7 +360,10 @@
                     topDesignDate: 'Cette horloge a été conçue le 12 novembre 2026.',
                     title: 'Chercheur en Théorie des Nombres & Événements de la Fin des Temps',
                     name: 'Mohamed BOUHAMIDA',
+                    birthYear: 'Né en 1969',
                     location: 'Aïn Séfra • Wilaya de Naâma • Algérie',
+                    dialRoleTop: 'Chercheur en Théorie des Nombres',
+                    dialRoleBottom: 'Intéressé par les Sciences de la Fin des Temps',
                     formatBtn: 'Format 12 / 24H',
                     hideHijri: 'Masquer Hégirien',
                     showHijri: 'Afficher Hégirien',
@@ -389,7 +391,10 @@
                     topDesignDate: 'Este reloj fue diseñado el 12 de noviembre de 2026.',
                     title: 'Investigador en Teoría de Números y Eventos del Fin de los Tiempos',
                     name: 'Mohamed BOUHAMIDA',
+                    birthYear: 'Nacido en 1969',
                     location: 'Ain Sefra • Provincia de Naama • Argelia',
+                    dialRoleTop: 'Investigador en Teoría de Números',
+                    dialRoleBottom: 'Interesado en Eventos del Fin de los Tiempos',
                     formatBtn: 'Formato 12 / 24 Horas',
                     hideHijri: 'Ocultar Hégira',
                     showHijri: 'Mostrar Hégira',
@@ -417,7 +422,10 @@
                     topDesignDate: 'Diese Uhr wurde am 12. November 2026 entworfen.',
                     title: 'Forscher für Zahlentheorie & Endzeit-Ereignisse',
                     name: 'Mohamed BOUHAMIDA',
+                    birthYear: 'Geboren 1969',
                     location: 'Ain Sefra • Provinz Naama • Algerien',
+                    dialRoleTop: 'Forscher für Zahlentheorie',
+                    dialRoleBottom: 'Interessiert an Endzeit-Wissenschaften',
                     formatBtn: '12 / 24 Stunden Format',
                     hideHijri: 'Hidschri ausblenden',
                     showHijri: 'Hidschri anzeigen',
@@ -445,7 +453,10 @@
                     topDesignDate: '本时钟设计于2026年11月12日。',
                     title: '数论与末世事件研究员',
                     name: 'Mohamed BOUHAMIDA (穆罕默德·布哈米达)',
+                    birthYear: '1969年出生',
                     location: '阿恩塞夫拉 • 纳马省 • 阿尔及利亚',
+                    dialRoleTop: '数论研究员',
+                    dialRoleBottom: '致力于末世事件与科学研究',
                     formatBtn: '12 / 24 小时制',
                     hideHijri: '隐藏伊斯兰历',
                     showHijri: '显示伊斯兰历',
@@ -473,7 +484,10 @@
                     topDesignDate: 'यह घड़ी 12 नवंबर 2026 को डिज़ाइन की गई थी।',
                     title: 'संख्या सिद्धांत और अंत समय की घटनाओं के शोधकर्ता',
                     name: 'Mohamed BOUHAMIDA (मोहम्मद बोहमिला)',
+                    birthYear: '1969 में जन्मे',
                     location: 'ऐन सेफरा • नामा प्रांत • अल्जीरिया',
+                    dialRoleTop: 'संख्या सिद्धांत में शोधकर्ता',
+                    dialRoleBottom: 'अंत समय की घटनाओं और विज्ञान में रुचि',
                     formatBtn: '12 / 24 घंटे का प्रारूप',
                     hideHijri: 'हिजरी छिपाएं',
                     showHijri: 'हिजरी दिखाएं',
@@ -501,7 +515,10 @@
                     topDesignDate: 'Эти часы были созданы 12 ноября 2026 года.',
                     title: 'Исследователь теории чисел и событий конца времен',
                     name: 'Mohamed BOUHAMIDA (Мохамед Бухамида)',
+                    birthYear: 'Родился в 1969 г.',
                     location: 'Айн-Сефра • Провинция Наама • Алжир',
+                    dialRoleTop: 'Исследователь теории чисел',
+                    dialRoleBottom: 'Наука и события конца времен',
                     formatBtn: 'Формат 12 / 24 часа',
                     hideHijri: 'Скрыть Хиджру',
                     showHijri: 'Показать Хиджру',
@@ -529,7 +546,10 @@
                     topDesignDate: 'この時計は2026年11月12日に設計されました。',
                     title: '数論および終末事象の研究者',
                     name: 'Mohamed BOUHAMIDA (モハメド・ブーハミダ)',
+                    birthYear: '1969年生まれ',
                     location: 'アインセフラ • 拿马省 • アルジェリア',
+                    dialRoleTop: '数論研究者',
+                    dialRoleBottom: '終末事象と科学の研究',
                     formatBtn: '12 / 24 時間表示',
                     hideHijri: 'ヒジュラ暦を隠す',
                     showHijri: 'ヒジュラ暦を表示',
@@ -557,7 +577,10 @@
                     topDesignDate: 'Questo orologio è stato progettato il 12 novembre 2026.',
                     title: 'Ricercatore in Teoria dei Numeri ed Eventi della Fine dei Tempi',
                     name: 'Mohamed BOUHAMIDA',
+                    birthYear: 'Nato nel 1969',
                     location: 'Ain Sefra • Provincia di Naama • Algeria',
+                    dialRoleTop: 'Ricercatore in Teoria dei Numeri',
+                    dialRoleBottom: 'Scienze ed Eventi della Fine dei Tempi',
                     formatBtn: 'Formato 12 / 24 Ore',
                     hideHijri: 'Nascondi Egira',
                     showHijri: 'Mostra Egira',
@@ -585,7 +608,10 @@
                     topDesignDate: 'Denna klocka designades den 12 november 2026.',
                     title: 'Forskare i talteori & sluttidshändelser',
                     name: 'Mohamed BOUHAMIDA',
+                    birthYear: 'Född 1969',
                     location: 'Ain Sefra • Naama-provinsen • Algeriet',
+                    dialRoleTop: 'Forskare i talteori',
+                    dialRoleBottom: 'Sluttidshändelser & vetenskap',
                     formatBtn: '12 / 24-timmarsformat',
                     hideHijri: 'Dölj Hijri',
                     showHijri: 'Visa Hijri',
@@ -613,7 +639,10 @@
                     topDesignDate: 'Bu saat 12 Kasım 2026 tarihinde tasarlanmıştır.',
                     title: 'Sayılar Teorisi ve Ahir Zaman Olayları Araştırmacısı',
                     name: 'Mohamed BOUHAMIDA',
+                    birthYear: '1969 doğumlu',
                     location: 'Ayn Sefra • Naama Vilayeti • Cezayir',
+                    dialRoleTop: 'Sayılar Teorisi Araştırmacısı',
+                    dialRoleBottom: 'Ahir Zaman Olayları ve İlimleri',
                     formatBtn: '12 / 24 Saat Formatı',
                     hideHijri: 'Hicri Gizle',
                     showHijri: 'Hicri Göster',
@@ -641,7 +670,10 @@
                     topDesignDate: 'Este relógio foi projetado em 12 de novembro de 2026.',
                     title: 'Pesquisador em Teoria dos Números e Eventos do Fim dos Tempos',
                     name: 'Mohamed BOUHAMIDA',
+                    birthYear: 'Nascido em 1969',
                     location: 'Ain Sefra • Província de Naama • Argélia',
+                    dialRoleTop: 'Pesquisador em Teoria dos Números',
+                    dialRoleBottom: 'Eventos e Ciências do Fim dos Tempos',
                     formatBtn: 'Formato 12 / 24 Horas',
                     hideHijri: 'Ocultar Hijri',
                     showHijri: 'Mostrar Hijri',
@@ -669,7 +701,10 @@
                     topDesignDate: 'این ساعت در تاریخ ۱۲ نوامبر ۲۰۲۶ طراحی شده است.',
                     title: 'پژوهشگر نظریه اعداد و رویدادهای آخرالزمان',
                     name: 'محمد بوحمیده',
+                    birthYear: 'متولد ۱۹۶۹',
                     location: 'عین الصفراء • استان النعامه • الجزایر',
+                    dialRoleTop: 'پژوهشگر در نظریه‌های اعداد',
+                    dialRoleBottom: 'علاقه‌مند به علوم و رویدادهای آخرالزمان',
                     formatBtn: 'فرمت ۱۲ / ۲۴ ساعته',
                     hideHijri: 'مخفی کردن هجری',
                     showHijri: 'نمایش هجری',
@@ -693,11 +728,14 @@
             };
 
             // Generate Clock Markers/Numbers
+            let isRomanMarkers = true;
             function generateDial() {
                 const dial = document.getElementById('dial-markers');
                 if (!dial) return;
                 dial.innerHTML = '';
-                const mathSymbols = ['XII', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
+                const romanSymbols = ['XII', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
+                const arabicSymbols = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
+                const symbols = isRomanMarkers ? romanSymbols : arabicSymbols;
                 
                 const radius = 41;
                 for (let i = 0; i < 12; i++) {
@@ -706,11 +744,30 @@
                     const y = 50 + radius * Math.sin(angle);
 
                     const marker = document.createElement('div');
-                    marker.className = 'absolute transform -translate-x-1/2 -translate-y-1/2 text-gold-400 font-bold font-orbitron text-xs sm:text-sm md:text-base select-none';
+                    marker.className = 'dial-marker-num absolute transform -translate-x-1/2 -translate-y-1/2 text-gold-400 font-bold font-orbitron text-xs sm:text-sm md:text-base select-none transition-opacity duration-300';
                     marker.style.left = `${x}%`;
                     marker.style.top = `${y}%`;
-                    marker.innerText = mathSymbols[i];
+                    marker.innerText = symbols[i];
                     dial.appendChild(marker);
+                }
+            }
+
+            // Update Dial Markers every 6 seconds between Roman and Standard Numbers
+            function updateDialMarkersCycle(now) {
+                const shouldBeRoman = Math.floor((now.getTime() / 6000) % 2) === 0;
+                if (shouldBeRoman !== isRomanMarkers) {
+                    isRomanMarkers = shouldBeRoman;
+                    const romanSymbols = ['XII', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
+                    const arabicSymbols = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
+                    const symbols = isRomanMarkers ? romanSymbols : arabicSymbols;
+                    const markers = document.querySelectorAll('.dial-marker-num');
+                    markers.forEach((marker, i) => {
+                        marker.style.opacity = '0';
+                        setTimeout(() => {
+                            marker.innerText = symbols[i];
+                            marker.style.opacity = '1';
+                        }, 150);
+                    });
                 }
             }
 
@@ -762,6 +819,7 @@
                 if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-square-root-variable ${config.dir === 'rtl' ? 'ml-1' : 'mr-1'}"></i> ${config.title}`;
                 
                 setElementText('researcher-name', config.name);
+                setElementText('researcher-birth', config.birthYear);
                 
                 const locEl = document.getElementById('location-text');
                 if (locEl) locEl.innerText = config.location;
@@ -923,6 +981,43 @@
 
                 // 6. Live 7-Decimal Counter above Analog Clock
                 setElementText('live-precise-years', calculatePrecisePastTravel(now));
+
+                // 6.5 Toggle Roman and Standard Numbers every 6 seconds
+                updateDialMarkersCycle(now);
+
+                // 7. Synchronized 12-Second Dial Text Cycle (3s Identity -> 3s Hidden -> 3s Titles -> 3s Hidden)
+                const cyclePhase = Math.floor((now.getTime() / 3000) % 4);
+                const dialTopGroup = document.getElementById('dial-top-group');
+                const dialNameEl = document.getElementById('dial-name');
+                const dialBirthEl = document.getElementById('dial-birth');
+                const dialLocEl = document.getElementById('dial-location');
+
+                if (dialTopGroup && dialNameEl && dialBirthEl && dialLocEl) {
+                    if (cyclePhase === 0) {
+                        // Show Name, Birth Year & Location (3 seconds)
+                        dialNameEl.innerText = config.name;
+                        dialBirthEl.innerText = config.birthYear;
+                        dialBirthEl.style.display = 'block';
+                        dialLocEl.innerText = config.location.replace(/\s*•\s*/g, ' ');
+                        dialTopGroup.style.opacity = '1';
+                        dialLocEl.style.opacity = '1';
+                    } else if (cyclePhase === 1) {
+                        // Hide both (3 seconds)
+                        dialTopGroup.style.opacity = '0';
+                        dialLocEl.style.opacity = '0';
+                    } else if (cyclePhase === 2) {
+                        // Show Researcher Specialties (3 seconds)
+                        dialNameEl.innerText = config.dialRoleTop;
+                        dialBirthEl.style.display = 'none';
+                        dialLocEl.innerText = config.dialRoleBottom;
+                        dialTopGroup.style.opacity = '1';
+                        dialLocEl.style.opacity = '1';
+                    } else {
+                        // Hide both (3 seconds)
+                        dialTopGroup.style.opacity = '0';
+                        dialLocEl.style.opacity = '0';
+                    }
+                }
             }
 
             // Initialize Application
