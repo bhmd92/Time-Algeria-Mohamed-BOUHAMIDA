@@ -88,7 +88,7 @@
 
         <!-- Top Cosmic Journey Banner -->
         <div class="z-20 w-full max-w-4xl px-2 mb-3">
-            <div class="glass-panel px-4 py-3 rounded-2xl border border-cyanNeon/40 text-center shadow-[0_0_20px_rgba(0,243,255,0.15)] space-y-2">
+            <div class="glass-panel px-4 py-3 rounded-2xl border border-cyanNeon/40 text-center shadow-[0_0_20px_rgba(0,243,255,0.15)] space-y-2 relative">
                 <p id="top-cosmic-banner" class="text-xs sm:text-sm md:text-base font-bold text-cyanNeon neon-cyan-text leading-relaxed">
                     <i class="fa-solid fa-clock-rotate-left text-gold-400 ml-1.5"></i>
                     الكون في رحلة عودة إلى الماضي، كل يومٍ يمرّ انطلاقا من 10 ماي 2010 يُعيد الأرض ألف عامٍ إلى الماضي. تابع الرحلة لحظة بلحظة، وحوّل أيّ تاريخ إلى سنوات في الماضي.
@@ -96,7 +96,7 @@
                 <p id="top-cosmic-subbanner" class="text-xs sm:text-sm text-slate-200 leading-relaxed pt-2 border-t border-cyanNeon/20">
                     نحن نعيش اليوم مناخا شبيها بالذي كانت عليه الأرض قبل 6 مليون سنة، ترقبوا معي في قادم الأيام تحسن جهاز مناعة جسم الإنسان (تحفيزه و تنشيطه و تقويته) نتيجة هذا السفر إلى الماضي (استدارة الزمان).
                 </p>
-                <p id="top-cosmic-date" class="text-[11px] sm:text-xs font-semibold text-gold-400">
+                <p id="top-cosmic-date" class="text-[11px] sm:text-xs font-semibold text-gold-400 pt-1">
                     <i class="fa-regular fa-clock ml-1"></i> صممت هذه الساعة يوم 12 نوفمبر 2026.
                 </p>
             </div>
@@ -271,14 +271,25 @@
         </section>
 
         <!-- Footer -->
-        <footer class="z-10 text-center pb-2 mt-2">
+        <footer class="z-10 text-center pb-3 mt-2 flex flex-col items-center gap-2">
+            <!-- Visitor Counter Badge -->
+            <div class="glass-panel px-4 py-1.5 rounded-full border border-cyanNeon/30 inline-flex items-center gap-2 text-xs sm:text-sm shadow-[0_0_15px_rgba(0,243,255,0.15)]">
+                <i class="fa-solid fa-eye text-cyanNeon animate-pulse"></i>
+                <span id="visitor-label" class="text-slate-300 font-semibold">عدد زيارات الساعة:</span>
+                <span id="visitor-count" class="font-orbitron font-bold text-gold-400 tracking-wider">...</span>
+            </div>
+
             <p id="footer-text" class="text-[10px] sm:text-xs text-slate-400 font-mono tracking-widest">
                 MOHAMED BOUHAMIDA RESEARCH CLOCK &bull; AIN SEFRA, ALGERIA
             </p>
         </footer>
 
         <!-- Application Logic Script -->
-        <script>
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+            import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+            import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
             let is24HourFormat = false;
             let isHijriVisible = true;
             let currentLang = 'ar';
@@ -319,6 +330,7 @@
                     minDateError: 'التاريخ يجب أن يكون 10 ماي 2010 أو بعده',
                     theoryTitle: 'رؤية ونظرية الباحث',
                     theoryText: 'يرى الباحث محمد بوحميدة أن سفر الأرض إلى محطات من ماضيها هو السبب الرئيسي والكبير لتغير المناخ الدولي (مع عدم إنكار أن للأنشطة البشرية دور في تغير المناخ لكنه ليس بالشيء الكبير جدا) أي أننا نشهد اليوم مناخا شبيها بالمناخ الذي كانت عليه الأرض قبل ملايين السنين، ويضيف الباحث أن هذا السفر إلى الماضي سيحفز وينشط ويقوي جهاز مناعة جسم الإنسان في قادم الأيام لجعله يتغلب على أمراض مستعصية والتي منها السرطان وأيضا ستتحسن حالة ذوي الاحتياجات الخاصة نتيجة هذه الاستدارة للزمان.',
+                    visitorLabel: 'عدد زيارات الساعة:',
                     footer: 'ساعة أبحاث محمد بوحميدة • عين الصفراء، الجزائر',
                     locale: 'ar-DZ'
                 },
@@ -350,6 +362,7 @@
                     minDateError: 'Date must be May 10, 2010 or later',
                     theoryTitle: "Researcher's Vision & Theory",
                     theoryText: 'Researcher Mohamed BOUHAMIDA posits that Earth’s journey into stages of its past is the primary and major cause of global climate change (without denying human activities play a role, though minor). Thus, today we experience a climate similar to millions of years ago. He adds that this time cycle will boost and strengthen the human immune system, overcoming incurable diseases such as cancer, while improving the condition of people with special needs as time turns.',
+                    visitorLabel: 'Clock Visits:',
                     footer: 'MOHAMED BOUHAMIDA RESEARCH CLOCK • AIN SEFRA, ALGERIA',
                     locale: 'en-US'
                 },
@@ -381,6 +394,7 @@
                     minDateError: 'La date doit être à partir du 10 mai 2010',
                     theoryTitle: "Vision et théorie du chercheur",
                     theoryText: "Le chercheur Mohamed BOUHAMIDA estime que le voyage de la Terre vers son passé est la cause principale du changement climatique mondial (sans nier le rôle mineur de l'activité humaine). Nous connaissons ainsi un climat similaire à celui d'il y a des millions d'années. Il ajoute que ce retour dans le temps stimulera le système immunitaire humain pour vaincre des maladies incurables comme le cancer et améliorera l'état des personnes à besoins spécifiques.",
+                    visitorLabel: 'Visites de l’horloge :',
                     footer: 'HORLOGE DE RECHERCHE MOHAMED BOUHAMIDA • AÏN SÉFRA, ALGÉRIE',
                     locale: 'fr-FR'
                 },
@@ -412,6 +426,7 @@
                     minDateError: 'La fecha debe ser a partir del 10 de mayo de 2010',
                     theoryTitle: 'Visión y Teoría del Investigador',
                     theoryText: 'El investigador Mohamed BOUHAMIDA sostiene que el viaje de la Tierra a etapas de su pasado es la causa principal del cambio climático global (sin negar un rol menor de la actividad humana). Así, presenciamos un clima similar al de hace millones de años. Agrega que este ciclo temporal fortalecerá el sistema inmunológico humano para superar enfermedades incurables como el cáncer y mejorará la condición de las personas con necesidades especiales.',
+                    visitorLabel: 'Visitas al reloj:',
                     footer: 'RELOJ DE INVESTIGACIÓN MOHAMED BOUHAMIDA • AIN SEFRA, ARGELIA',
                     locale: 'es-ES'
                 },
@@ -443,6 +458,7 @@
                     minDateError: 'Datum muss ab dem 10. Mai 2010 sein',
                     theoryTitle: 'Vision und Theorie des Forschers',
                     theoryText: 'Der Forscher Mohamed BOUHAMIDA vertritt die Auffassung, dass die Reise der Erde in Stationen ihrer Vergangenheit die Hauptursache für den globalen Klimawandel ist. Wir erleben heute ein Klima wie vor Millionen von Jahren. Er fügt hinzu, dass dieser Zeitkreislauf das menschliche Immunsystem stärken wird, um unheilbare Krankheiten wie Krebs zu besiegen und die Lebensqualität von Menschen mit besonderen Bedürfnissen zu verbessern.',
+                    visitorLabel: 'Uhr-Besuche:',
                     footer: 'FORSCHUNGSUHR MOHAMED BOUHAMIDA • AIN SEFRA, ALGERIEN',
                     locale: 'de-DE'
                 },
@@ -474,6 +490,7 @@
                     minDateError: '日期必须为2010年5月10日或之后',
                     theoryTitle: '研究员的理论与构想',
                     theoryText: '研究员穆罕默德·布哈米达认为，地球走向其过去的各个阶段是全球气候变化的主要原因（不否认人类活动有微小影响）。今天我们所经历的气候类似于数百万年前的气候。他补充说，这种时间的重塑将增强人体免疫系统，克服包括癌症在内的顽疾，并改善特殊需求人群的状况。',
+                    visitorLabel: '时钟访问次数：',
                     footer: 'MOHAMED BOUHAMIDA 研究时钟 • 阿尔及利亚阿恩塞夫拉',
                     locale: 'zh-CN'
                 },
@@ -505,6 +522,7 @@
                     minDateError: 'तिथि 10 मई 2010 या उसके बाद की होनी चाहिए',
                     theoryTitle: 'शोधकर्ता की दृष्टि और सिद्धांत',
                     theoryText: 'शोधकर्ता मोहम्मद बोहमिला का मानना ​​है कि पृथ्वी की इसके अतीत के चरणों की यात्रा वैश्विक जलवायु परिवर्तन का मुख्य कारण है (मानव गतिविधियों की मामूली भूमिका से इंकार किए बिना)। हम लाखों साल पहले की जलवायु देख रहे हैं। उन्होंने आगे कहा कि समय का यह चक्र मानव प्रतिरक्षा प्रणाली को मजबूत करेगा, जिससे कैंसर जैसी बीमारियों पर विजय प्राप्त होगी और विशेष आवश्यकताओं वाले लोगों की स्थिति में सुधार होगा।',
+                    visitorLabel: 'घड़ी की कुल विज़िट:',
                     footer: 'मोहम्मद बोहमिला अनुसंधान घड़ी • ऐन सेफरा, अल्जीरिया',
                     locale: 'hi-IN'
                 },
@@ -536,6 +554,7 @@
                     minDateError: 'Дата должна быть не ранее 10 мая 2010 года',
                     theoryTitle: 'Взгляд и теория исследователя',
                     theoryText: 'Исследователь Мохамед Бухамида считает, что путешествие Земли в этапы её прошлого является главной причиной глобального изменения климата. Сегодня мы наблюдаем климат, похожий на тот, что был миллионы лет назад. Он добавляет, что этот циклический поворот времени активизирует иммунную систему человека для победы над неизлечимыми болезнями, включая рак, и улучшит состояние людей с ограниченными возможностями.',
+                    visitorLabel: 'Посещений часов:',
                     footer: 'ИССЛЕДОВАТЕЛЬСКИЕ ЧАСЫ МОХАМЕДА БУХАМИДЫ • АЙН-СЕФРА, АЛЖИР',
                     locale: 'ru-RU'
                 },
@@ -567,6 +586,7 @@
                     minDateError: '日付は2010年5月10日以降である必要があります',
                     theoryTitle: '研究者のビジョンと理論',
                     theoryText: '研究者モハメド・ブーハミダ氏は、地球が過去の段階へ巡ることが世界的な気候変動の主要な原因であると考えています。今日私たちが経験している気候は数百万年前のものと似ています。時間の反転により人間の免疫系が活性化され、がんなどの難病を克服し、特別なニーズを持つ人々の状態も改善されると述べています。',
+                    visitorLabel: '時計の訪問数：',
                     footer: 'MOHAMED BOUHAMIDA 研究時計 • アルジェリア・アインセフラ',
                     locale: 'ja-JP'
                 },
@@ -598,6 +618,7 @@
                     minDateError: 'La data deve essere dal 10 maggio 2010 in poi',
                     theoryTitle: 'Visione e Teoria del Ricercatore',
                     theoryText: 'Il ricercatore Mohamed BOUHAMIDA ritiene che il viaggio della Terra verso fasi del suo passato sia la causa principale del cambiamento climatico globale. Oggi assistiamo a un clima simile a quello di milioni di anni fa. Aggiunge che questo ciclo temporale stimolerà il sistema immunitario umano per superare malattie incurabili come il cancro e migliorerà la condizione delle persone con esigenze speciali.',
+                    visitorLabel: 'Visite all’orologio:',
                     footer: 'OROLOGIO DI RICERCA MOHAMED BOUHAMIDA • AIN SEFRA, ALGERIA',
                     locale: 'it-IT'
                 },
@@ -629,6 +650,7 @@
                     minDateError: 'Datum måste vara från 10 maj 2010 eller senare',
                     theoryTitle: 'Forskarens vision och teori',
                     theoryText: 'Forskaren Mohamed BOUHAMIDA anser att jordens resa till stadier av sitt förflutna är den främsta orsaken till den globala klimatförändringen. Vi upplever idag ett klimat som liknar det för miljoner år sedan. Han tillägger att denna tidscykel kommer att stärka det mänskliga immunsystemet för att övervinna obotliga sjukdomar som cancer och förbättra tillståndet för personer med särskilda behov.',
+                    visitorLabel: 'Besök på klockan:',
                     footer: 'MOHAMED BOUHAMIDA FORSKNINGSUR • AIN SEFRA, ALGERIET',
                     locale: 'sv-SE'
                 },
@@ -660,6 +682,7 @@
                     minDateError: 'Tarih 10 Mayıs 2010 veya sonrası olmalıdır',
                     theoryTitle: 'Araştırmacının Görüşü ve Teorisi',
                     theoryText: 'Araştırmacı Mohamed BOUHAMIDA, Dünya\'nın geçmişine doğru yolculuğunun küresel iklim değişikliğinin ana nedeni olduğuna inanmaktadır. Bugün milyonlarca yıl önceki iklime benzer bir iklime tanıklık ediyoruz. Zamanın bu dönüşünün, insan bağışıklık sistemini güçlendirerek kanser gibi amansız hastalıkların üstesinden geleceğini ve özel gereksinimli bireylerin durumunu iyileştireceğini ekliyor.',
+                    visitorLabel: 'Saat Ziyaretleri:',
                     footer: 'MOHAMED BOUHAMIDA ARAŞTIRMA SAATİ • AYN SEFRA, CEZAYİR',
                     locale: 'tr-TR'
                 },
@@ -691,6 +714,7 @@
                     minDateError: 'A data deve ser a partir de 10 de maio de 2010',
                     theoryTitle: 'Visão e Teoria do Pesquisador',
                     theoryText: 'O pesquisador Mohamed BOUHAMIDA defende que a viagem da Terra a estágios do seu passado é a causa principal da mudança climática global. Hoje testemunhamos um clima semelhante ao de milhões de anos atrás. Ele acrescenta que esse ciclo temporal fortalecerá o sistema imunológico humano para combater doenças incuráveis como o câncer e melhorará a condição de pessoas com necessidades especiais.',
+                    visitorLabel: 'Visitas ao relógio:',
                     footer: 'RELÓGIO DE PESQUISA MOHAMED BOUHAMIDA • AIN SEFRA, ARGÉLIA',
                     locale: 'pt-PT'
                 },
@@ -722,6 +746,7 @@
                     minDateError: 'تاریخ باید ۱۰ مه ۲۰۱۰ یا بعد از آن باشد',
                     theoryTitle: 'دیدگاه و نظریه پژوهشگر',
                     theoryText: 'پژوهشگر محمد بوحمیده معتقد است که سفر زمین به ایستگاه‌هایی از گذشته خود، علت اصلی تغییرات اقلیمی جهانی است (بدون انکار نقش جزئی فعالیت‌های انسانی). ما امروزه شاهد آب‌وهوایی شبیه به میلیون‌ها سال پیش هستیم. او می‌افزاید که این چرخش زمان، سیستم ایمنی بدن انسان را تقویت کرده تا بر بیماری‌های صعب‌العلاج مانند سرطان غلبه کند و وضعیت افراد دارای معلولیت نیز بهبود یابد.',
+                    visitorLabel: 'تعداد بازدیدهای ساعت:',
                     footer: 'ساعت پژوهشی محمد بوحمیده • عین الصفراء، الجزایر',
                     locale: 'fa-IR'
                 }
@@ -834,6 +859,7 @@
                 setElementText('lbl-result-date', config.lblResultDate);
                 setElementText('theory-title', config.theoryTitle);
                 setElementText('theory-paragraph', config.theoryText);
+                setElementText('visitor-label', config.visitorLabel);
                 setElementText('footer-text', config.footer);
                 setElementText('live-precise-label', config.yearsInPastUnit);
 
@@ -973,50 +999,93 @@
                     calibratedNow.setDate(calibratedNow.getDate() + offsetDays);
                     setElementText('hijri-date', calibratedNow.toLocaleDateString(hijriLocale, hijriOptions));
                 } catch (e) {
-                    setElementText('hijri-date', '--');
+                    setElementText('hijri-date', '2 جمادى الآخرة 1448 هـ');
                 }
 
-                // 5. Time Travel Calendar Display
+                // 5. Past Travel Calendar Display (Millions of Years)
                 setElementText('past-travel-date', calculatePastTravel(now));
 
-                // 6. Live 7-Decimal Counter above Analog Clock
+                // 6. Live High-Precision Years Display above Analog Clock
                 setElementText('live-precise-years', calculatePrecisePastTravel(now));
 
-                // 6.5 Toggle Roman and Standard Numbers every 6 seconds
-                updateDialMarkersCycle(now);
-
-                // 7. Synchronized 12-Second Dial Text Cycle (3s Identity -> 3s Hidden -> 3s Titles -> 3s Hidden)
+                // 7. Synchronized 3-second cycle inside Analog Dial
                 const cyclePhase = Math.floor((now.getTime() / 3000) % 4);
-                const dialTopGroup = document.getElementById('dial-top-group');
-                const dialNameEl = document.getElementById('dial-name');
-                const dialBirthEl = document.getElementById('dial-birth');
-                const dialLocEl = document.getElementById('dial-location');
+                const topGroup = document.getElementById('dial-top-group');
+                const dialName = document.getElementById('dial-name');
+                const dialBirth = document.getElementById('dial-birth');
+                const dialLocation = document.getElementById('dial-location');
 
-                if (dialTopGroup && dialNameEl && dialBirthEl && dialLocEl) {
+                if (topGroup && dialName && dialBirth && dialLocation) {
                     if (cyclePhase === 0) {
-                        // Show Name, Birth Year & Location (3 seconds)
-                        dialNameEl.innerText = config.name;
-                        dialBirthEl.innerText = config.birthYear;
-                        dialBirthEl.style.display = 'block';
-                        dialLocEl.innerText = config.location.replace(/\s*•\s*/g, ' ');
-                        dialTopGroup.style.opacity = '1';
-                        dialLocEl.style.opacity = '1';
-                    } else if (cyclePhase === 1) {
-                        // Hide both (3 seconds)
-                        dialTopGroup.style.opacity = '0';
-                        dialLocEl.style.opacity = '0';
+                        dialName.innerText = config.name;
+                        dialBirth.innerText = config.birthYear;
+                        dialBirth.style.display = 'block';
+                        dialLocation.innerText = config.location;
+                        topGroup.style.opacity = '1';
+                        dialLocation.style.opacity = '1';
                     } else if (cyclePhase === 2) {
-                        // Show Researcher Specialties (3 seconds)
-                        dialNameEl.innerText = config.dialRoleTop;
-                        dialBirthEl.style.display = 'none';
-                        dialLocEl.innerText = config.dialRoleBottom;
-                        dialTopGroup.style.opacity = '1';
-                        dialLocEl.style.opacity = '1';
+                        dialName.innerText = config.dialRoleTop;
+                        dialBirth.style.display = 'none';
+                        dialLocation.innerText = config.dialRoleBottom;
+                        topGroup.style.opacity = '1';
+                        dialLocation.style.opacity = '1';
                     } else {
-                        // Hide both (3 seconds)
-                        dialTopGroup.style.opacity = '0';
-                        dialLocEl.style.opacity = '0';
+                        topGroup.style.opacity = '0';
+                        dialLocation.style.opacity = '0';
                     }
+                }
+
+                // 8. Dial Markers 6-second cycle (Roman <-> Standard Numbers)
+                updateDialMarkersCycle(now);
+            }
+
+            // Initialize Live Visitor Counter
+            async function initVisitorCounter() {
+                const countEl = document.getElementById('visitor-count');
+                if (!countEl) return;
+
+                try {
+                    if (typeof __firebase_config !== 'undefined') {
+                        const firebaseConfig = JSON.parse(__firebase_config);
+                        const app = initializeApp(firebaseConfig);
+                        const auth = getAuth(app);
+                        const db = getFirestore(app);
+                        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+                        // Authenticate first before any Firestore operations
+                        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                            await signInWithCustomToken(auth, __initial_auth_token);
+                        } else {
+                            await signInAnonymously(auth);
+                        }
+
+                        if (!auth.currentUser) return;
+
+                        const counterRef = doc(db, 'artifacts', appId, 'public', 'data', 'analytics', 'clock_visits');
+                        
+                        // Listen in real-time to total visits
+                        onSnapshot(counterRef, (snap) => {
+                            if (snap.exists()) {
+                                const total = snap.data().count || 1;
+                                countEl.innerText = total.toLocaleString('en-US');
+                            }
+                        }, (err) => {
+                            console.error("Counter snapshot error:", err);
+                        });
+
+                        // Increment visit count once per page load
+                        const docSnap = await getDoc(counterRef);
+                        if (docSnap.exists()) {
+                            await updateDoc(counterRef, { count: increment(1) });
+                        } else {
+                            await setDoc(counterRef, { count: 1 });
+                        }
+                    } else {
+                        countEl.innerText = '1';
+                    }
+                } catch (error) {
+                    console.error("Visitor counter initialization error:", error);
+                    countEl.innerText = '1';
                 }
             }
 
@@ -1024,6 +1093,7 @@
             function initClockApp() {
                 generateDial();
                 applyLanguage('ar');
+                initVisitorCounter();
                 setInterval(updateClock, 50);
 
                 const toggleBtn = document.getElementById('toggle-format');
